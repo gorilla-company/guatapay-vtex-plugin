@@ -13,33 +13,33 @@
 - [x]  **Settlements**: Create Settlements Endpoint and Function
 
 ### Provider functions
-- [x]  **Session**: Create new session for make a payment
+- [ ]  **Session**: Create new session for make a payment
 
 ### Webhooks
-- [x]  Handle order created (in `controllers/ipn.controller.ts`)
-- [x]  Update order and send to vtex
+- [ ]  Handle order created (in `controllers/ipn.controller.ts`)
+- [ ]  Update order and send to vtex
 
 ### Finishing
-- [x]  Update Postman collection and copy to */docs* folder
-- [x]  Adapt and/or extend README.md
-  - [x]  Environment Variables
-  - [x]  Project Structure
-  - [x]  API Endpoints
-  - [x]  State Diagrams
+- [ ]  Update Postman collection and copy to */docs* folder
+- [ ]  Adapt and/or extend README.md
+  - [ ]  Environment Variables
+  - [ ]  Project Structure
+  - [ ]  API Endpoints
+  - [ ]  State Diagrams
 
 ### Testing
-- [x] Mongoose Models
-  - [x] Adapt Order
-  - [x] Adapt User
-- [x] Services
-  - [x] `services/provider.service.ts`
-  - [x] `services/vtex.service.ts`
-  - [x] `services/database/order.service.ts`
-  - [x] `services/database/user.service.ts`
-- [x] Middlewares
-  - [x] `middlewares/error.middleware.ts`
-- [x] Routes
-  - [x] `routes/ipn.routes.ts`   
-  - [x] `routes/vitals.routes.ts`
-  - [x] `routes/vtex.routes.ts`
+- [ ] Mongoose Models
+  - [ ] Adapt Order
+  - [ ] Adapt User
+- [ ] Services
+  - [ ] `services/provider.service.ts`
+  - [ ] `services/vtex.service.ts`
+  - [ ] `services/database/order.service.ts`
+  - [ ] `services/database/user.service.ts`
+- [ ] Middlewares
+  - [ ] `middlewares/error.middleware.ts`
+- [ ] Routes
+  - [ ] `routes/ipn.routes.ts`   
+  - [ ] `routes/vitals.routes.ts`
+  - [ ] `routes/vtex.routes.ts`
   

@@ -1,13 +1,13 @@
 ![Logo](https://conexa.ai/wp-content/uploads/2021/03/logo.svg)
 
-# VTEX - PROVIDER
+# VTEX - GUATAPAY
 
 ## Manual Installation
 
 Clone the repo:
 
 ```bash
-git clone https://gitlab.com/conexa-projects/provider-vtex/backend-vtex
+git clone https://gitlab.com/conexa-projects/guatapay-vtex/backend-vtex
 ```
 
 Install the dependencies:
@@ -270,13 +270,13 @@ The environment variables can be found and modified in the `.env` file. They com
 ```bash
 - PORT=5420
 - NODE_ENV=development
-- API_URL="https://provider-vtex-api.conexa.ai"
-- MONGODB_URL=mongodb://provider-vtex-bd:27028/provider-vtex
+- API_URL="https://guatapay-vtex-api.conexa.ai"
+- MONGODB_URL=mongodb://guatapay-vtex-bd:27028/guatapay-vtex
 - VTEX_API=""
 - VTEX_TOKEN=""
-- provider_URL="https://uat.provider.com/api/v1"
-- PROVIDER_API_KEY=""
-- provider_USER=""
+- guatapay_URL="https://uat.guatapay.com/api/v1"
+- guatapay_API_KEY=""
+- guatapay_USER=""
 ```
 
 | Environment Variable | Description | Default Value  |
@@ -286,9 +286,9 @@ The environment variables can be found and modified in the `.env` file. They com
 | `VTEX_API` | vtex API key| `empty` |
 | `VTEX_TOKEN` | vtex API token| `empty` |
 | `NODE_ENV` | The environment to execute| `development` |
-| `provider_URL` | provider API URL| `https://uat.provider.com/api/v1` |
-| `PROVIDER_API_KEY` | provider API key| `empty` |
-| `provider_USER` | provider username| `empty` |
+| `guatapay_URL` | guatapay API URL| `https://uat.guatapay.com/api/v1` |
+| `guatapay_API_KEY` | guatapay API key| `empty` |
+| `guatapay_USER` | guatapay username| `empty` |
 | `MONGODB_URL` | The URL of the Mongo DB | `mongodb://
 
 
@@ -331,7 +331,7 @@ List of available routes (base path: `/api/v1`):
 `POST /vtex/payments/:payment_id/refunds` - Refund payment
 
 **Webhook routes**:\
-`GET /ipn/event` - Instant payment notification from provider-vtex\
+`GET /ipn/event` - Instant payment notification from guatapay-vtex\
 
 **Vitals routes**:\
 `GET /` - GET a welcome message from server
@@ -348,14 +348,14 @@ List of available routes (base path: `/api/v1`):
 sequenceDiagram
     participant VTEX
     participant MIDDLEMAN
-    participant provider
+    participant guatapay
     participant DB
-    Note over MIDDLEMAN: provider-pay as payment method
+    Note over MIDDLEMAN: guatapay-pay as payment method
 
     VTEX->>MIDDLEMAN: POST /api/v1/vtex/payments
-    Note left of provider: Create a Session
-    MIDDLEMAN->>provider: POST /session
-    provider-->>MIDDLEMAN: Session Response
+    Note left of guatapay: Create a Session
+    MIDDLEMAN->>guatapay: POST /session
+    guatapay-->>MIDDLEMAN: Session Response
     Note right of MIDDLEMAN: FIND OR CREATE USER 
     Note right of MIDDLEMAN: CREATE TRANSACTION
     MIDDLEMAN-->>VTEX: RESPONSE PAYMENT STATUS
@@ -367,13 +367,13 @@ sequenceDiagram
 sequenceDiagram
     participant VTEX
     participant MIDDLEMAN
-    participant provider
+    participant guatapay
     Note over MIDDLEMAN: Webhook Event
 
-    provider->>MIDDLEMAN: GET /ipn/event
+    guatapay->>MIDDLEMAN: GET /ipn/event
     Note right of MIDDLEMAN: query params: SESSION ID and USENAME
-    MIDDLEMAN->>provider: GET /session/{session_id}
-    provider-->>MIDDLEMAN: SESSION RESPONSE
+    MIDDLEMAN->>guatapay: GET /session/{session_id}
+    guatapay-->>MIDDLEMAN: SESSION RESPONSE
     Note right of MIDDLEMAN: FIND TRANSACTION
     Note right of MIDDLEMAN: UPDATE TRANSACTION
     MIDDLEMAN->>VTEX: POST /callback_url
@@ -385,7 +385,7 @@ sequenceDiagram
 sequenceDiagram
     participant VTEX
     participant MIDDLEMAN
-    participant provider
+    participant guatapay
     Note over MIDDLEMAN: CANCEL PAYMENT
 
     VTEX->>MIDDLEMAN: POST vtex/payments/:payment_id/cancellations
@@ -398,7 +398,7 @@ sequenceDiagram
 sequenceDiagram
     participant VTEX
     participant MIDDLEMAN
-    participant provider
+    participant guatapay
     Note over MIDDLEMAN: REFUND PAYMENT
 
     VTEX->>MIDDLEMAN: POST vtex/payments/:payment_id/refunds
@@ -411,7 +411,7 @@ sequenceDiagram
 sequenceDiagram
     participant VTEX
     participant MIDDLEMAN
-    participant provider
+    participant guatapay
     Note over MIDDLEMAN: SETTLE PAYMENT
 
     VTEX->>MIDDLEMAN: POST vtex/payments/:payment_id/settlements
@@ -424,7 +424,7 @@ sequenceDiagram
 sequenceDiagram
     participant VTEX
     participant MIDDLEMAN
-    participant provider
+    participant guatapay
     Note over MIDDLEMAN: PING REQUEST
     Note over MIDDLEMAN: PONG RESPONSE
     

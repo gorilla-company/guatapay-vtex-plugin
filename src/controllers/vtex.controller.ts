@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import { catchAsync } from 'conexa-core-server';
 import { Logger } from 'conexa-core-server';
 import { paymentMethods, customFields } from '../config/paymentProvider';
-import * as windcaveService from '../services/provider.service';
+import * as vtexService from '../services/vtex.service';
 
 import vtexPackage from 'vtex-package-ts';
 const { payments: vtex } = vtexPackage;
@@ -29,19 +29,24 @@ const paymentMethod = catchAsync(async (_req: Request, res: Response) => {
  * @returns {Response} response with object to redirect payment
  */
 const payment = catchAsync(async (req: Request, res: Response) => {
-  const { body } = req
   Logger.debug('===== PAYMENTS =====');
-  // Get merchant Data
-  const merchantData = await vtex.getMerchantData(
-    body,
-    customFields
-  );
-  
-  Logger.debug('===== WINDCAVE CREATE SESSION =====');
-  // Create a new Payment Session
-  const paymentUrlResponse = await windcaveService.createSession(body, merchantData);
-  const vtexResponse = vtex.paymentResponse(body,paymentUrlResponse,undefined);
-  res.status(200).json(vtexResponse)
+  const {
+      paymentId,
+      callbackUrl,
+      returnUrl,
+  } = req.body;
+
+
+  res.json({
+      paymentId,
+      status: 'undefined',
+      callbackUrl,
+      returnUrl,
+      paymentUrl: 'https://www.conexa.ai',
+      tid: 'PaymentIntentionID - 129838723874',
+  });
+
+  await vtexService.makeVtexPayment(callbackUrl,paymentId, req.headers);
 });
 
 /**
