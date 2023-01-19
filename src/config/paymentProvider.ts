@@ -6,17 +6,17 @@ export const paymentMethods = [
         allowsSplit: 'disabled',
     },
 ];
-const usernameCustomField: ICustomField = {
-    name: "Username - Guatapay",
+const clientIdCustomField: ICustomField = {
+    name: "Client ID - Guatapay",
     type: 'text'
 }
 
-const apiKeyCustomField: ICustomField = {
-    name: "API key production - Guatapay",
+const clientSecretCustomField: ICustomField = {
+    name: "Client Secret - Guatapay",
     type: 'text'
 }
 
 export const customFields = [
-    usernameCustomField,
-    apiKeyCustomField
+    clientIdCustomField,
+    clientSecretCustomField
 ];
