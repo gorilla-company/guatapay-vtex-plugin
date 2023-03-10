@@ -1,17 +1,17 @@
 import axios from 'axios';
 import { Logger } from 'conexa-core-server';
 import { RequestHandler } from 'express-serve-static-core';
-import manifestToVtex from '../config/manifest.json';
-import paymentMethodToVtex from '../config/paymentMethods.json';
 
 const SOME_ID = '972e-b67ad7b498ba';
+const manifestToVtex = await import('../config/manifest.json', { assert: { type: 'json' } });
+const paymentMethodToVtex = await import('../config/paymentMethods.json', { assert: { type: 'json' } });
 
-export const manifest: RequestHandler = async (_, res) => {
+const manifest: RequestHandler = async (_, res) => {
   Logger.info('===== MANIFEST =====');
   res.json(manifestToVtex);
 };
 
-export const paymentMethods: RequestHandler = async (_, res) => {
+const paymentMethods: RequestHandler = async (_, res) => {
   Logger.info('===== PAYMENT METHODS =====');
   res.json(paymentMethodToVtex);
 };
@@ -43,6 +43,9 @@ const sendSyncResponse = (req: Request, res: any, status: string) => {
 };
 
 const getAuthHeadersFromIncomingRequest = () => {
+  // 'X-VTEX-API-AppKey': req.headers['x-vtex-api-appkey'],
+  // 'X-VTEX-API-AppToken': req.headers['x-vtex-api-apptoken'],
+
   return {
     'X-VTEX-API-AppKey': 'vtexappkey-modopartnerar-YUGGCU',
     'X-VTEX-API-AppToken':
@@ -83,7 +86,7 @@ const getStatusFromCardEnding = (cardNumber: string) => {
   return { statusSync, statusAsync };
 };
 
-export const payments = async (req: any, res: any) => {
+const payments = async (req: any, res: any) => {
   try {
     Logger.info('\n===== CREATE PAYMENT =====');
     const cardNumber = req.body.card?.number;
@@ -108,7 +111,7 @@ export const payments = async (req: any, res: any) => {
   }
 };
 
-export const cancellations = async (req: any, res: any) => {
+const cancellations = async (req: any, res: any) => {
   Logger.info('===== CANCEL PAYMENT =====');
   const { requestId, paymentId } = req.body;
 
@@ -122,7 +125,7 @@ export const cancellations = async (req: any, res: any) => {
   res.status(501).json(payload);
 };
 
-export const refunds = async (req: any, res: any) => {
+const refunds = async (req: any, res: any) => {
   Logger.info('===== REFUND PAYMENT =====');
   const { requestId, paymentId } = req.body;
 
@@ -137,7 +140,7 @@ export const refunds = async (req: any, res: any) => {
   res.status(501).json(payload);
 };
 
-export const settlements = async (req: any, res: any) => {
+const settlements = async (req: any, res: any) => {
   Logger.info('===== SETTLE PAYMENT =====');
   const { requestId, paymentId, value } = req.body;
 
@@ -151,3 +154,5 @@ export const settlements = async (req: any, res: any) => {
   };
   res.status(200).json(payload);
 };
+
+export default { payments, manifest, cancellations, refunds, settlements, paymentMethods };
