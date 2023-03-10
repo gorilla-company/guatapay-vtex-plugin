@@ -1,17 +1,16 @@
 import axios from 'axios';
 import { Logger } from 'conexa-core-server';
-import { RequestHandler } from 'express-serve-static-core';
 
 const SOME_ID = '972e-b67ad7b498ba';
 const manifestToVtex = await import('../config/manifest.json', { assert: { type: 'json' } });
 const paymentMethodToVtex = await import('../config/paymentMethods.json', { assert: { type: 'json' } });
 
-const manifest: RequestHandler = async (_, res) => {
+const manifest = async (_req: any, res: any) => {
   Logger.info('===== MANIFEST =====');
   res.json(manifestToVtex);
 };
 
-const paymentMethods: RequestHandler = async (_, res) => {
+const paymentMethods = async (_req: any, res: any) => {
   Logger.info('===== PAYMENT METHODS =====');
   res.json(paymentMethodToVtex);
 };
