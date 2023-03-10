@@ -1,50 +1,48 @@
-pipeline {
-	agent {
-		node {
-			label 'urbano-staging'
-			customWorkspace '/home/conexa/oca/backend-tn'
-		}
+pipeline{
+
+	agent{
+	        node {
+          	        label 'clip-production'
+            }
+         }
+	environment {
+        SCANNER_HOME = tool 'sonarqube'
 	}
 	stages {
-		stage('Installation of dependencies') {
-			steps {
-                		echo 'npm install.......'
-				dir('/home/conexa/oca/backend-tn') {
-					sh 'yarn install'
-				}
-            		}
-        	}
-		stage('Build app') {
-			steps {
-                		echo 'copying .env.example........'
-				dir('/home/conexa/oca/backend-tn'){
-					script {
-						sh "cp .env.example .env"
-						sh "sed -i '4,5d' /home/conexa/oca/backend-tn/.env"
-                        sh "sed -i '4i API_URL=https://oca-tiendanube-api-stage.conexa.ai' /home/conexa/oca/backend-tn/.env"  
-                        sh "sed -i '5i FRONTEND_URL=https://oca-tiendanube-stage.conexa.ai' /home/conexa/oca/backend-tn/.env" 
-					}
-				}
-            		}
-        	}
-        	stage('Launch app') {
-            		steps {
-                		echo 'pm2 start.......'
-				   	    sh 'yarn compile'
-					    sh 'pm2 start ecosystem.config.json'
-					    sh 'pm2 save'
-            		}
-        	}
-    	}
-	post {
-		success {
-	               	slackSend channel: '#notifications-jenkins', color: '#6495ed', message: "Success: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-        	}
+    stage('SonarQube analysis') {
+    
+    steps {
+            script{
+			        dir('/home/conexa/workspace/Clients/Guatapay/staging/analyzing-deploy-source-code/src'){
 
-      		failure {
-	               	slackSend channel: '#notifications-jenkins', color: '#ff0000', message: "Failure: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-      		}
+                            withSonarQubeEnv(credentialsId: 'jenkins-sonarqube', installationName: 'sonarqube') {
+                                                sh '''$SCANNER_HOME/bin/sonar-scanner \
+                                                -Dsonar.projectKey=guatapay-backend-vtex-stage \
+                                                -Dsonar.projectName=guatapay-backend-vtex-stage \
+                                                -Dsonar.sources=. \
+                                                -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
+                            }
+                    }
+                  }
+           }
+}
+stage("Quality gate") {
+      steps {
+        script {
+          def qualitygate = waitForQualityGate()
+          sleep(10)
+          if (qualitygate.status != "OK") {
+            waitForQualityGate abortPipeline: true
+          }
+        }
+      }
+    }
 
-  	}
+stage ("build") {		//an arbitrary stage name
+            steps {
+                build 'deploy-backend-vtex'	//this is where we specify which job to invoke.
+            }
+        }
+}
 
 }
