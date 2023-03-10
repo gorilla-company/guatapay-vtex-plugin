@@ -2,7 +2,7 @@ pipeline{
 
 	agent{
 	        node {
-          	        label 'srv2-docker-staging'
+          	        label 'clip-production'
             }
          }
 	environment {
