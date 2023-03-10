@@ -42,10 +42,11 @@ const sendSyncResponse = (req: Request, res: any, status: string) => {
   res.json(payload);
 };
 
-const getAuthHeadersFromIncomingRequest = (req: any) => {
+const getAuthHeadersFromIncomingRequest = () => {
   return {
-    'X-VTEX-API-AppKey': req.headers['x-vtex-api-appkey'],
-    'X-VTEX-API-AppToken': req.headers['x-vtex-api-apptoken'],
+    'X-VTEX-API-AppKey': 'vtexappkey-modopartnerar-YUGGCU',
+    'X-VTEX-API-AppToken':
+      'RNHADJQBXLQEVEPOZVYFMOROAQYUSNVLDLMLVBAKIWDMEDQLHNRCPGKVHQZBUADOVXOGDXFUJRANEDBBQKTHACQOVQJYLOFRXYBTIJABZGPEOKSYLDITZZQXODAEEQTM',
   };
 };
 
@@ -56,7 +57,7 @@ const sendSyncAndAsyncResponses = (req: any, res: Response, status = 'approved')
   // Sends the async response after a little while
   setTimeout(() => {
     const payload = buildPaymentResponseBody(req, status);
-    const headers = getAuthHeadersFromIncomingRequest(req);
+    const headers = getAuthHeadersFromIncomingRequest();
 
     axios.post(req.body.callbackUrl, payload, { headers });
   }, 1000);
