@@ -91,6 +91,8 @@ const payments = async (req: any, res: any) => {
     const cardNumber = req.body.card?.number;
     const { paymentMethod } = req.body;
 
+    if (paymentMethod === undefined) return;
+
     Logger.info('Payment Method:', paymentMethod);
 
     if (cardNumber) {
