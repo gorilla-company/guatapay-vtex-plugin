@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { Logger } from 'conexa-core-server';
 
+import manifestToVtex from '../config/manifest';
+import paymentMethodToVtex from '../config/paymentMethods';
+
 const SOME_ID = '972e-b67ad7b498ba';
-const manifestToVtex = await import('../config/manifest.json', { assert: { type: 'json' } });
-const paymentMethodToVtex = await import('../config/paymentMethods.json', { assert: { type: 'json' } });
 
 const manifest = async (_req: any, res: any) => {
   Logger.info('===== MANIFEST =====');
