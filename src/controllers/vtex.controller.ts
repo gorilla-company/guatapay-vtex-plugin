@@ -124,7 +124,7 @@ const cancellations = async (req: any, res: any) => {
     code: 'cancel-manually',
     cancellationId: null,
   };
-  res.status(501).json(payload);
+  res.status(200).json(payload);
 };
 
 const refunds = async (req: any, res: any) => {
@@ -139,7 +139,7 @@ const refunds = async (req: any, res: any) => {
     requestId,
     message: 'This payment needs to be manually refunded',
   };
-  res.status(501).json(payload);
+  res.status(200).json(payload);
 };
 
 const settlements = async (req: any, res: any) => {
