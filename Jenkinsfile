@@ -17,8 +17,8 @@ pipeline{
 
                             withSonarQubeEnv(credentialsId: 'jenkins-sonarqube', installationName: 'sonarqube') {
                                                 sh '''$SCANNER_HOME/bin/sonar-scanner \
-                                                -Dsonar.projectKey=guatapay-backend-vtex-stage \
-                                                -Dsonar.projectName=guatapay-backend-vtex-stage \
+                                                -Dsonar.projectKey=guatapay-backend-vtex-prod \
+                                                -Dsonar.projectName=guatapay-backend-vtex-prod \
                                                 -Dsonar.sources=. \
                                                 -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
                             }
