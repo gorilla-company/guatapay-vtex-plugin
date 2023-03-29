@@ -10,4 +10,8 @@
   "eslint.validate": [
     "typescript"
   ],
+  "cSpell.words": [
+    "Guatapay",
+    "vtex"
+  ],
 }
