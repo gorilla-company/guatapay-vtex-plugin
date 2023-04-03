@@ -10,4 +10,7 @@
   "eslint.validate": [
     "typescript"
   ],
+  "cSpell.words": [
+    "vtex"
+  ],
 }
