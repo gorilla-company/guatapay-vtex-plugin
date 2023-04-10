@@ -3,7 +3,7 @@ import { Response, Request } from 'express';
 import { getTransactionsCount } from '../services/database/transaction.service';
 
 export const welcome = async (_req: any, res: Response) => {
-  res.send('Hello World - Windcave - Vtex');
+  res.send('Hello World - Guatapay - Vtex');
 };
 
 export const dbCheck = async (_req: Request, res: Response) => {
