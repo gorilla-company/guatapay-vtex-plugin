@@ -7891,10 +7891,10 @@ vm2@^3.9.8:
     acorn "^8.7.0"
     acorn-walk "^8.2.0"
 
-vtex-package-ts@^0.0.11:
-  version "0.0.11"
-  resolved "http://npm-registry.conexa.ai/vtex-package-ts/-/vtex-package-ts-0.0.11.tgz"
-  integrity sha512-bng6eZK1gez5HLI1D6/7GN4w423rcUqRt7bytzO4QzTOLuaOqAvjL3cvh164Xr3MKU8iLV2j/8ZJInUdAKDNHA==
+vtex-package-ts@^0.0.17:
+  version "0.0.17"
+  resolved "http://npm-registry.conexa.ai/vtex-package-ts/-/vtex-package-ts-0.0.17.tgz#49fa67ddbceda6c88be7e994af026e87e6417fa5"
+  integrity sha512-Fve7JYLuViWtycj6XQb8ppE4bUk50346tTCSsbe4iwWA5JSpqx4f6ySem0TE+IRFNh4dfSUUtmNIwqqZNZuPvw==
   dependencies:
     axios "^0.27.2"
     country-iso-2-to-3 "^1.1.0"

@@ -37,7 +37,7 @@
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
     "generate:docs": "node ./src/lib/scripts/postmanConverter.js",
-    "install-all": "npm install vtex-package-ts --registry https://npm-registry.conexa.ai && npm install"
+    "install-all": "yarn add vtex-package-ts@latest --registry https://npm-registry.conexa.ai"
   },
   "keywords": [],
   "devDependencies": {
@@ -106,7 +106,7 @@
     "standard-version": "^9.5.0",
     "swagger-ui-express": "^4.5.0",
     "validator": "^13.7.0",
-    "vtex-package-ts": "^0.0.11",
+    "vtex-package-ts": "^0.0.17",
     "winston": "^3.3.3",
     "xss-clean": "^0.1.1"
   },

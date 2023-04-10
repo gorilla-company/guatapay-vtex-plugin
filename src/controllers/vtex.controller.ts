@@ -1,160 +1,59 @@
-import axios from 'axios';
-import { Logger } from 'conexa-core-server';
+import { Logger, catchAsync } from 'conexa-core-server';
+import vtexPackage from 'vtex-package-ts';
+import { Request, Response } from 'express';
+import { customFields, paymentMethods as paymentMethodsAvailable } from '../config/manifest';
 
-import manifestToVtex from '../config/manifest';
-import paymentMethodToVtex from '../config/paymentMethods';
+const { payments: vtex } = vtexPackage;
 
-const SOME_ID = '972e-b67ad7b498ba';
-
-const manifest = async (_req: any, res: any) => {
+const manifest = catchAsync(async (_req: Request, res: Response) => {
   Logger.info('===== MANIFEST =====');
-  res.json(manifestToVtex);
-};
+  res.json(vtex.manifest(paymentMethodsAvailable, customFields));
+});
 
-const paymentMethods = async (_req: any, res: any) => {
+const paymentMethods = catchAsync(async (_req: Request, res: Response) => {
   Logger.info('===== PAYMENT METHODS =====');
-  res.json(paymentMethodToVtex);
-};
+  res.json(paymentMethodsAvailable);
+});
 
-const buildPaymentResponseBody = (req: any, status: string) => {
+const payments = catchAsync(async (req: Request, res: Response) => {
+  Logger.info('===== PAYMENT =====');
   const { body } = req;
+  const { orderId } = body;
 
-  const payload: any = {
-    paymentId: body.paymentId,
-    status,
-    callbackUrl: body.callbackUrl,
-    returnUrl: body.returnUrl,
-    paymentUrl: 'https://mypaymenturl.com',
-    tid: body.paymentId,
+  const merchantData = await vtex.getMerchantData(body, customFields);
+  const paymentAppData = {
+    appName: 'guatapay.vtex', // todo: check if this is the correct name
+    payload: { orderId }, // todo: check what front needs
   };
 
-  if (status !== 'undefined') {
-    payload.authorizationId = SOME_ID;
-    payload.nsu = SOME_ID;
-    payload.settleId = SOME_ID;
-  }
-
-  return payload;
-};
-
-const sendSyncResponse = (req: Request, res: any, status: string) => {
-  const payload = buildPaymentResponseBody(req, status);
-  res.json(payload);
-};
-
-const getAuthHeadersFromIncomingRequest = () => {
-  // 'X-VTEX-API-AppKey': req.headers['x-vtex-api-appkey'],
-  // 'X-VTEX-API-AppToken': req.headers['x-vtex-api-apptoken'],
-
-  return {
-    'X-VTEX-API-AppKey': 'vtexappkey-modopartnerar-YUGGCU',
-    'X-VTEX-API-AppToken':
-      'RNHADJQBXLQEVEPOZVYFMOROAQYUSNVLDLMLVBAKIWDMEDQLHNRCPGKVHQZBUADOVXOGDXFUJRANEDBBQKTHACQOVQJYLOFRXYBTIJABZGPEOKSYLDITZZQXODAEEQTM',
-  };
-};
-
-const sendSyncAndAsyncResponses = (req: any, res: Response, status = 'approved') => {
-  // Send standard response for async methods
-  sendSyncResponse(req, res, 'undefined');
-
-  // Sends the async response after a little while
-  setTimeout(() => {
-    const payload = buildPaymentResponseBody(req, status);
-    const headers = getAuthHeadersFromIncomingRequest();
-
-    axios.post(req.body.callbackUrl, payload, { headers });
-  }, 1000);
-};
-
-const getStatusFromCardEnding = (cardNumber: string) => {
-  const cardNumberEnding = cardNumber.slice(15);
-
-  const paymentStatusSyncMap: any = {
-    '1': 'approved',
-    '2': 'denied',
-    '4': 'undefined',
-    '5': 'undefined',
-  };
-  const paymentStatusAsyncMap: any = {
-    '4': 'approved',
-    '5': 'denied',
+  const dataToVtex = {
+    status: 'undefined',
+    ...merchantData,
+    ...paymentAppData,
   };
 
-  const statusSync = paymentStatusSyncMap[cardNumberEnding];
-  const statusAsync = paymentStatusAsyncMap[cardNumberEnding];
+  Logger.info('===== PAYMENT APP INIT =====');
+  res.status(200).send(dataToVtex);
+});
 
-  return { statusSync, statusAsync };
-};
+const cancellations = catchAsync(async (req: Request, res: Response) => {
+  Logger.info('===== CANCELLATION =====');
+  const { payload, status } = vtex.cancellationPaymentResponse(req.body);
+  Logger.error('===== CANCELLATION MUST BE DONE MANUALLY =====');
+  res.status(status).send(payload);
+});
 
-const payments = async (req: any, res: any) => {
-  try {
-    Logger.info('\n===== CREATE PAYMENT =====');
-    const cardNumber = req.body.card?.number;
-    const { paymentMethod } = req.body;
+const refunds = catchAsync(async (req: Request, res: Response) => {
+  Logger.info('===== REFUNDS =====');
+  const { payload, status } = vtex.refundPaymentResponse(req.body);
+  Logger.error('===== REFUNDS MUST BE DONE MANUALLY =====');
+  res.status(status).send(payload);
+});
 
-    if (paymentMethod === undefined) return;
+const settlements = catchAsync(async (req: Request, res: Response) => {
+  Logger.info('===== SETTLEMENTS =====');
+  const response = vtex.settlementsPaymentResponse(req.body);
+  res.status(200).json(response);
+});
 
-    Logger.info('Payment Method:', paymentMethod);
-
-    if (cardNumber) {
-      const { statusSync, statusAsync } = getStatusFromCardEnding(cardNumber);
-      Logger.info({ statusSync, statusAsync });
-
-      // if we respond 'undefined', we need to send an async response to tell how the transaction ended
-      if (statusSync === 'undefined') return sendSyncAndAsyncResponses(req, res, statusAsync);
-      return sendSyncResponse(req, res, statusSync);
-    }
-    Logger.info('Sync method');
-    // It is a redirect method
-    return sendSyncAndAsyncResponses(req, res, 'approved');
-  } catch (error) {
-    Logger.info(error);
-    res.send('error');
-  }
-};
-
-const cancellations = async (req: any, res: any) => {
-  Logger.info('===== CANCEL PAYMENT =====');
-  const { requestId, paymentId } = req.body;
-
-  const payload = {
-    paymentId,
-    message: 'Cancellation should be done manually',
-    requestId,
-    code: 'cancel-manually',
-    cancellationId: null,
-  };
-  res.status(200).json(payload);
-};
-
-const refunds = async (req: any, res: any) => {
-  Logger.info('===== REFUND PAYMENT =====');
-  const { requestId, paymentId } = req.body;
-
-  const payload = {
-    paymentId,
-    refundId: null,
-    value: 0,
-    code: 'refund-manually',
-    requestId,
-    message: 'This payment needs to be manually refunded',
-  };
-  res.status(200).json(payload);
-};
-
-const settlements = async (req: any, res: any) => {
-  Logger.info('===== SETTLE PAYMENT =====');
-  const { requestId, paymentId, value } = req.body;
-
-  const payload = {
-    paymentId,
-    value,
-    requestId,
-    message: 'transaction settled',
-    code: paymentId,
-    settleId: paymentId,
-  };
-  res.status(200).json(payload);
-};
-
-export default { payments, manifest, cancellations, refunds, settlements, paymentMethods };
+export default { manifest, paymentMethods, payments, cancellations, refunds, settlements };
