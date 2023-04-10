@@ -1,4 +1,5 @@
 export type Currency = 'btc' | 'usdc' | 'lightning-btc';
+export type Status = 'pending' | 'completed' | 'expired';
 
 export interface ILogin {
   user: {
@@ -32,4 +33,47 @@ export interface IMarketQuoteResponse {
     },
   ];
   expires_in: string;
+}
+
+export interface IPaymentIntentResponse {
+  merchantId: string;
+  addressAccountId: string;
+  addressAccount: string;
+  inputCurrency: string;
+  outputCurrency: string;
+  inputAmount: number;
+  outputAmount: number;
+  feesPayedInCrypto: number;
+  feesPayedInFiat: number;
+  amountPayed: number;
+  tradeOrderId: number;
+  status: Status;
+  lightningInvoice: string;
+  createdAt: string;
+  paymentId: string;
+  expiresIn: string;
+  qrCodeData: {
+    qrCodeUri: string;
+    qrCodeLocation: string;
+  };
+  fullInputAmount: string;
+}
+
+export interface IPaymentDataResponse {
+  _id: string;
+  merchantId: string;
+  addressAccountId: string;
+  addressAccount: string;
+  inputCurrency: string;
+  outputCurrency: string;
+  inputAmount: number;
+  outputAmount: number;
+  feesPayedInCrypto: number;
+  feesPayedInFiat: number;
+  amountPayed: number;
+  tradeOrderId: number;
+  status: Status;
+  lightningInvoice: string;
+  createdAt: string;
+  __v: number;
 }
