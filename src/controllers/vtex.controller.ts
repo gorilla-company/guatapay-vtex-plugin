@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { Logger } from 'conexa-core-server';
 
+import manifestToVtex from '../config/manifest';
+import paymentMethodToVtex from '../config/paymentMethods';
+
 const SOME_ID = '972e-b67ad7b498ba';
-const manifestToVtex = await import('../config/manifest.json', { assert: { type: 'json' } });
-const paymentMethodToVtex = await import('../config/paymentMethods.json', { assert: { type: 'json' } });
 
 const manifest = async (_req: any, res: any) => {
   Logger.info('===== MANIFEST =====');
@@ -123,7 +124,7 @@ const cancellations = async (req: any, res: any) => {
     code: 'cancel-manually',
     cancellationId: null,
   };
-  res.status(501).json(payload);
+  res.status(200).json(payload);
 };
 
 const refunds = async (req: any, res: any) => {
@@ -138,7 +139,7 @@ const refunds = async (req: any, res: any) => {
     requestId,
     message: 'This payment needs to be manually refunded',
   };
-  res.status(501).json(payload);
+  res.status(200).json(payload);
 };
 
 const settlements = async (req: any, res: any) => {
