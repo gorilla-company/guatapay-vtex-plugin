@@ -20,7 +20,7 @@ const config = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   cryptojsKey: envVars.CRYPTOJS_SECRET_KEY,
-  vtexUrl: envVars.VTEX_URL,
+  vtexApi: envVars.VTEX_API,
   vtexKey: envVars.VTEX_KEY,
   vtexToken: envVars.VTEX_TOKEN,
   apiVersion: 'v1',
