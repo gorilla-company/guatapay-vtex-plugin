@@ -7,7 +7,7 @@ import vitalsRoute from './vitals.routes';
 import config from '../config/config';
 
 const router = express.Router();
-const apiPrefix = `/api/${config.apiVersion}`
+const apiPrefix = `/api/${config.apiVersion}`;
 interface IRoute {
   path: string;
   route: Router;
@@ -28,7 +28,6 @@ const defaultIRoute: IRoute[] = [
     path: `${apiPrefix}/ipn`,
     route: ipnRoute,
   },
-
 ];
 
 defaultIRoute.forEach((route) => {
