@@ -39,7 +39,7 @@ export interface IPaymentIntentResponse {
   merchantId: string;
   addressAccountId: string;
   addressAccount: string;
-  inputCurrency: string;
+  inputCurrency: Currency;
   outputCurrency: string;
   inputAmount: number;
   outputAmount: number;

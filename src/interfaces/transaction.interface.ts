@@ -6,6 +6,7 @@ export interface ITransactionInit {
   orderId: string;
   vtexPaymentId: string;
   vtexTransactionId: string;
+  vtexCallbackUrl: string;
   reference: string;
   status: Status;
   nsu: string;
@@ -26,7 +27,7 @@ export interface ITransaction extends ITransactionInit {
   money: IMoney;
 }
 
-interface IMoney {
+export interface IMoney {
   cryptoCurrency: Currency;
   fiatCurrency: string;
   cryptoAmount: number;

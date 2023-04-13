@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import toJSON from '../lib/toJSON/toJSON';
 import { IUser } from '../interfaces/user.interfaces';
+import { protectedString } from '@/lib/db.protection';
 
 const userSchema = new mongoose.Schema<IUser>(
   {
@@ -10,10 +11,7 @@ const userSchema = new mongoose.Schema<IUser>(
       index: true,
     },
     // Client Auth
-    password: {
-      type: String,
-      required: true,
-    },
+    password: protectedString,
     apiKey: String,
     // Dates
     dateModified: Date,

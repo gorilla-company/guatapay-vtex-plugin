@@ -93,7 +93,7 @@
     "express": "^4.17.1",
     "express-mongo-sanitize": "^2.1.0",
     "express-rate-limit": "^5.5.1",
-    "guatapay-sdk": "^0.0.5",
+    "guatapay-sdk": "^0.0.6",
     "helmet": "^4.6.0",
     "http-status": "^1.5.0",
     "husky": "^8.0.2",

@@ -1,22 +1,24 @@
 import { Logger } from 'conexa-core-server';
 import httpStatus from 'http-status';
-import { tradesServices } from 'guatapay-sdk';
+import { tradesServices, ClientSDK, authService } from 'guatapay-sdk';
 import { IMerchantData, IVtexPayment } from '@/interfaces/payment.interface';
-import { findOrCreateUser } from './database/user.service';
+import { findUser, createUser } from './database/user.service';
 import ApiError from '../lib/ApiError';
 import { ITransactionInit } from '@/interfaces/transaction.interface';
 import { createTransaction, findTransaction } from './database/transaction.service';
 import { Currency } from '@/interfaces/client.interface';
+import { handlingToUpdateTransaction, payloadToPaymentApp } from '../lib/provider';
 
 const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchantData) => {
   Logger.info('==== GUATAPAY INIT PAYMENT SERVICE ====');
   try {
-    const dbUser = await findOrCreateUser({
+    const merchant = {
       username: merchantData['Client ID - Guatapay'],
       password: merchantData['Client Secret - Guatapay'],
-    });
+    };
 
-    if (!dbUser) throw new ApiError(httpStatus.NOT_FOUND, 'User not found', 'user.not-found');
+    let dbUser = await findUser(merchant.username);
+    if (!dbUser) dbUser = await createUser(merchant.username, merchant.password);
 
     const transaction: ITransactionInit = {
       username: dbUser.username,
@@ -24,6 +26,7 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
       orderId: vtexPaymentBody.orderId,
       vtexTransactionId: vtexPaymentBody.transactionId,
       vtexPaymentId: vtexPaymentBody.paymentId,
+      vtexCallbackUrl: vtexPaymentBody.callbackUrl,
       reference: vtexPaymentBody.reference,
       status: 'init',
       nsu: `NSU-${vtexPaymentBody.paymentId}`,
@@ -37,12 +40,12 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
 
     await createTransaction(transaction);
 
-    const { orderId, money, vtexPaymentId: paymentId, nsu, tid, authorizationId } = transaction;
+    const { vtexPaymentId: paymentId, nsu, tid, authorizationId, money } = transaction;
+    const payload = payloadToPaymentApp(paymentId, money.fiatAmount, money.fiatCurrency);
 
     const paymentAppData = {
-      // TODO: check if this name is correct
-      appName: 'guatapay.vtex',
-      payload: JSON.stringify({ orderId, money }),
+      appName: 'guatapay.vtex', // TODO: check if this name is correct
+      payload,
     };
 
     const response = {
@@ -55,7 +58,7 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
       message: null,
       code: null,
       delayToAutoSettleAfterAntifraud: 0,
-      delayToCancel: 3600,
+      delayToCancel: 600,
       delayToAutoSettle: 1,
     };
 
@@ -66,14 +69,10 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
   }
 };
 
-const getQuotation = async (currency: Currency, orderId: string) => {
+const getQuotation = async (currency: Currency, total: string) => {
+  Logger.info('==== GUATAPAY GET QUOTATION ====');
   try {
-    const dbTransaction = await findTransaction({ orderId });
-
-    if (!dbTransaction)
-      throw new ApiError(httpStatus.NOT_FOUND, 'Transaction not found', 'transaction.not-found');
-
-    const data = { currency, amount: Number(dbTransaction.money.fiatAmount) };
+    const data = { currency, amount: Number(total) };
 
     const { crypto: cryptoQuote, fiat: fiatQuote, buyerFees } = await tradesServices.getMarketQuote(data);
 
@@ -96,7 +95,73 @@ const getQuotation = async (currency: Currency, orderId: string) => {
   }
 };
 
+const createIntentPayment = async (currency: Currency, vtexPaymentId: string) => {
+  Logger.info('==== GUATAPAY CREATE INTENT PAYMENT ====');
+  try {
+    const dbTransaction = await findTransaction({ vtexPaymentId });
+
+    if (!dbTransaction)
+      throw new ApiError(httpStatus.NOT_FOUND, 'Transaction not found', 'transaction.not-found');
+
+    const dbUser = await findUser(dbTransaction.username);
+
+    if (!dbUser) throw new ApiError(httpStatus.NOT_FOUND, 'User not found', 'user.not-found');
+
+    const { username, password, apiKey } = dbUser;
+
+    const token = await authService.authenticate(username, password);
+
+    const guatapay = new ClientSDK(token, apiKey, username);
+
+    const paymentIntent = await guatapay.Payment.createPaymentIntent({
+      currency,
+      amount: Number(dbTransaction.money.fiatAmount),
+    });
+
+    const { money, guatapayPaymentId, addressAccount } = await handlingToUpdateTransaction(
+      dbTransaction,
+      paymentIntent,
+    );
+
+    dbTransaction.guatapayPaymentId = guatapayPaymentId;
+    dbTransaction.money = money;
+    dbTransaction.addressAccount = addressAccount;
+
+    await dbTransaction.save();
+
+    const { cryptoAmount, feesPayedInCrypto, fiatAmount, feesPayedInFiat } = money;
+    const { direction: address } = addressAccount;
+    const crypto = { amount: cryptoAmount, fee: feesPayedInCrypto };
+    const fiat = { amount: fiatAmount, fee: feesPayedInFiat };
+    const response = { address, crypto, fiat, paymentId: vtexPaymentId };
+
+    return response;
+  } catch (err) {
+    Logger.error('Could not create a intent payment');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a intent payment', JSON.stringify(err));
+  }
+};
+
+// const getGuatapayPaymentStatus = async (vtexPaymentId: string) => {
+//   Logger.info('==== GUATAPAY GET PAYMENT STATUS ====');
+//   try {
+//     const dbTransaction = await findTransaction({ vtexPaymentId });
+
+//     if (!dbTransaction)
+//       throw new ApiError(httpStatus.NOT_FOUND, 'Transaction not found', 'transaction.not-found');
+
+//     const { guatapayPaymentId } = dbTransaction;
+
+//     // SDK para consultar el estado del payment sin autorizacion
+//     const paymentStatus = 'pending';
+//   } catch (err) {
+//     Logger.error('Could not get a payment status');
+//     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not get a payment status', JSON.stringify(err));
+//   }
+// };
+
 export default {
   initPayment,
   getQuotation,
+  createIntentPayment,
 };

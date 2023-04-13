@@ -8,6 +8,7 @@ const TransactionSchema = new mongoose.Schema<ITransaction>(
     orderId: { type: String, unique: true },
     vtexTransactionId: { type: String },
     vtexPaymentId: { type: String },
+    vtexCallbackUrl: { type: String },
     guatapayPaymentId: { type: String, default: null },
     reference: { type: String },
     status: { type: String },
