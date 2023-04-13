@@ -1,10 +1,7 @@
-
 export interface IUser {
-  
-  userId: string,
-  // Client Auth
+  username: string;
+  password: string;
   apiKey: string;
-  // Dates
   dateModified: Date;
   dateCreated: Date;
 }

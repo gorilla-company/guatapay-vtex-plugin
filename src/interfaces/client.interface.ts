@@ -1,5 +1,5 @@
 export type Currency = 'btc' | 'usdc' | 'lightning-btc';
-export type Status = 'pending' | 'completed' | 'expired';
+export type Status = 'init' | 'pending' | 'completed' | 'expired';
 
 export interface ILogin {
   user: {

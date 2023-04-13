@@ -95,3 +95,8 @@ export interface IVtexBody {
   status: string;
   paymentId: string;
 }
+
+export interface IMerchantData {
+  'Client ID - Guatapay': string;
+  'Client Secret - Guatapay': string;
+}

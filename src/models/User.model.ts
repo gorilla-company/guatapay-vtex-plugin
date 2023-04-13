@@ -4,12 +4,16 @@ import { IUser } from '../interfaces/user.interfaces';
 
 const userSchema = new mongoose.Schema<IUser>(
   {
-    userId: {
+    username: {
       type: String,
       required: true,
       index: true,
     },
     // Client Auth
+    password: {
+      type: String,
+      required: true,
+    },
     apiKey: String,
     // Dates
     dateModified: Date,

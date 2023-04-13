@@ -4532,10 +4532,10 @@
   "resolved" "http://npm-registry.conexa.ai/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz"
   "version" "1.0.4"
 
-"guatapay-sdk@^0.0.4":
-  "integrity" "sha512-TnF1vlGx4knh/GHMvLvKyZcAwCB6zKlOlWeFCQgk/Ii0iCRTKEkYn0o2salisZLwnKRHwSPZGajSLial3DK18g=="
-  "resolved" "http://npm-registry.conexa.ai/guatapay-sdk/-/guatapay-sdk-0.0.4.tgz"
-  "version" "0.0.4"
+"guatapay-sdk@^0.0.5":
+  "integrity" "sha512-lhOadfcyZZjAK9FjLUNja/JkymqBUkKSdoeoqJJgV/gsmQHEG1nP6euRhHnLvO+qE01a14S6hA4/KSdlmzQ6fw=="
+  "resolved" "http://npm-registry.conexa.ai/guatapay-sdk/-/guatapay-sdk-0.0.5.tgz"
+  "version" "0.0.5"
   dependencies:
     "@commitlint/cli" "^17.2.0"
     "@commitlint/config-conventional" "^17.2.0"
