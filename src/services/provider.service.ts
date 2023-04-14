@@ -18,7 +18,12 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
     };
 
     let dbUser = await findUser(merchant.username);
-    if (!dbUser) dbUser = await createUser(merchant.username, merchant.password);
+
+    if (!dbUser) {
+      Logger.info('User does not have apiKey');
+      dbUser = await createUser(merchant.username, merchant.password);
+      Logger.info('User apiKey created');
+    }
 
     const transaction: ITransactionInit = {
       username: dbUser.username,
@@ -69,23 +74,19 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
   }
 };
 
-const getQuotation = async (currency: Currency, total: string) => {
+const getQuotation = async (currency: Currency, amount: string) => {
   Logger.info('==== GUATAPAY GET QUOTATION ====');
   try {
-    const data = { currency, amount: Number(total) };
-
+    const data = { currency, amount: Number(amount) };
     const { crypto: cryptoQuote, fiat: fiatQuote, buyerFees } = await tradesServices.getMarketQuote(data);
-
     const crypto = {
       amount: cryptoQuote.amount,
       fee: buyerFees[0].expressedInCrypto,
     };
-
     const fiat = {
       amount: fiatQuote.amount,
       fee: buyerFees[1].expressedInFiat,
     };
-
     const response = { crypto, fiat };
 
     return response;
@@ -95,10 +96,10 @@ const getQuotation = async (currency: Currency, total: string) => {
   }
 };
 
-const createIntentPayment = async (currency: Currency, vtexPaymentId: string) => {
+const createIntentPayment = async (currency: Currency, paymentId: string) => {
   Logger.info('==== GUATAPAY CREATE INTENT PAYMENT ====');
   try {
-    const dbTransaction = await findTransaction({ vtexPaymentId });
+    const dbTransaction = await findTransaction({ vtexPaymentId: paymentId });
 
     if (!dbTransaction)
       throw new ApiError(httpStatus.NOT_FOUND, 'Transaction not found', 'transaction.not-found');
@@ -108,10 +109,8 @@ const createIntentPayment = async (currency: Currency, vtexPaymentId: string) =>
     if (!dbUser) throw new ApiError(httpStatus.NOT_FOUND, 'User not found', 'user.not-found');
 
     const { username, password, apiKey } = dbUser;
-
-    const token = await authService.authenticate(username, password);
-
-    const guatapay = new ClientSDK(token, apiKey, username);
+    const authToken = await authService.authenticate(username, password);
+    const guatapay = new ClientSDK(authToken, apiKey, username);
 
     const paymentIntent = await guatapay.Payment.createPaymentIntent({
       currency,
@@ -133,7 +132,7 @@ const createIntentPayment = async (currency: Currency, vtexPaymentId: string) =>
     const { direction: address } = addressAccount;
     const crypto = { amount: cryptoAmount, fee: feesPayedInCrypto };
     const fiat = { amount: fiatAmount, fee: feesPayedInFiat };
-    const response = { address, crypto, fiat, paymentId: vtexPaymentId };
+    const response = { address, crypto, fiat, paymentId };
 
     return response;
   } catch (err) {
@@ -141,24 +140,6 @@ const createIntentPayment = async (currency: Currency, vtexPaymentId: string) =>
     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a intent payment', JSON.stringify(err));
   }
 };
-
-// const getGuatapayPaymentStatus = async (vtexPaymentId: string) => {
-//   Logger.info('==== GUATAPAY GET PAYMENT STATUS ====');
-//   try {
-//     const dbTransaction = await findTransaction({ vtexPaymentId });
-
-//     if (!dbTransaction)
-//       throw new ApiError(httpStatus.NOT_FOUND, 'Transaction not found', 'transaction.not-found');
-
-//     const { guatapayPaymentId } = dbTransaction;
-
-//     // SDK para consultar el estado del payment sin autorizacion
-//     const paymentStatus = 'pending';
-//   } catch (err) {
-//     Logger.error('Could not get a payment status');
-//     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not get a payment status', JSON.stringify(err));
-//   }
-// };
 
 export default {
   initPayment,

@@ -5,6 +5,7 @@ import ipnRoute from './ipn.routes';
 import vtexRoute from './vtex.routes';
 import vitalsRoute from './vitals.routes';
 import config from '../config/config';
+import paymentAppRoute from './payment-app.routes';
 
 const router = express.Router();
 const apiPrefix = `/api/${config.apiVersion}`;
@@ -27,6 +28,10 @@ const defaultIRoute: IRoute[] = [
   {
     path: `${apiPrefix}/ipn`,
     route: ipnRoute,
+  },
+  {
+    path: `${apiPrefix}/payment-app`,
+    route: paymentAppRoute,
   },
 ];
 

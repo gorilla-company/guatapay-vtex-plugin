@@ -2,7 +2,7 @@ import { IUser } from '@/interfaces/user.interfaces';
 import User from '../../models/User.model';
 import { generateApiKey } from '../../lib/provider';
 
-export const findUser = async (username: string) => User.findOne({ username }, { upsert: true });
+export const findUser = async (username: string) => User.findOne({ username });
 
 export const createUser = async (username: string, password: string) => {
   const newUser: IUser = {
