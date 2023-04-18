@@ -1,5 +1,5 @@
 export type Currency = 'btc' | 'usdc' | 'lightning-btc';
-export type Status = 'pending' | 'completed' | 'expired';
+export type Status = 'init' | 'pending' | 'completed' | 'expired';
 
 export interface ILogin {
   user: {
@@ -39,7 +39,7 @@ export interface IPaymentIntentResponse {
   merchantId: string;
   addressAccountId: string;
   addressAccount: string;
-  inputCurrency: string;
+  inputCurrency: Currency;
   outputCurrency: string;
   inputAmount: number;
   outputAmount: number;

@@ -1,27 +1,39 @@
+import { Status, Currency } from './client.interface';
 
-
-export interface ITransaction{
-    status: string,
-    orderId: string,
-    vtexPaymentId: string,
-    price: string,
-    vtexCallbackUrl:string,
-    userId:string,
-    urlWindcave: string,
-    transactionId: string,
-    reference:string,
-    merchantReference: string,
-    tid: string,
-    apiKey: string,
-    username:string
+export interface ITransactionInit {
+  username: string;
+  apiKey: string;
+  orderId: string;
+  vtexPaymentId: string;
+  vtexTransactionId: string;
+  vtexCallbackUrl: string;
+  reference: string;
+  status: Status;
+  nsu: string;
+  tid: string;
+  authorizationId: string;
+  money: {
+    fiatCurrency: string;
+    fiatAmount: string;
+  };
 }
 
-export interface IPaymentResponse {
-    paymentId: string,
-    status: string,
-    callbackUrl: string,
-    returnUrl: string,
-    paymentUrl: string,
-    tid: string,
-    delayToCancel: number // 15 min delay for cancellation.
-  }
+export interface ITransaction extends ITransactionInit {
+  guatapayPaymentId: string;
+  addressAccount: {
+    id: string;
+    direction: string;
+  };
+  money: IMoney;
+}
+
+export interface IMoney {
+  cryptoCurrency: Currency;
+  fiatCurrency: string;
+  cryptoAmount: number;
+  fiatAmount: string;
+  feesPayedInCrypto: number;
+  feesPayedInFiat: number;
+  amountPayed: number;
+  fullInputAmount: string;
+}

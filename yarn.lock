@@ -1792,37 +1792,18 @@
   dependencies:
     "@types/express" "*"
 
-"@types/express-serve-static-core@^4.17.18", "@types/express-serve-static-core@^4.17.30":
-  version "4.17.31"
-  resolved "http://npm-registry.conexa.ai/@types%2fexpress-serve-static-core/-/express-serve-static-core-4.17.31.tgz"
-  integrity sha512-DxMhY+NAsTwMMFHBTtJFNp5qiHKJ7TeqOo23zVEM9alT1Ml27Q3xcTH0xwxn7Q0BbMcVEJOs/7aQtUWupUQN3Q==
-  dependencies:
-    "@types/node" "*"
-    "@types/qs" "*"
-    "@types/range-parser" "*"
-
-"@types/express-serve-static-core@^4.17.33":
+"@types/express-serve-static-core@^4.17.30", "@types/express-serve-static-core@^4.17.33":
   version "4.17.33"
-  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.33.tgz#de35d30a9d637dc1450ad18dd583d75d5733d543"
+  resolved "http://npm-registry.conexa.ai/@types%2fexpress-serve-static-core/-/express-serve-static-core-4.17.33.tgz"
   integrity sha512-TPBqmR/HRYI3eC2E5hmiivIzv+bidAfXofM+sbonAGvyDhySGw9/PQZFt2BLOrjUUR++4eJVpx6KnLQK1Fk9tA==
   dependencies:
     "@types/node" "*"
     "@types/qs" "*"
     "@types/range-parser" "*"
 
-"@types/express@*", "@types/express@^4.17.14":
-  version "4.17.14"
-  resolved "http://npm-registry.conexa.ai/@types%2fexpress/-/express-4.17.14.tgz"
-  integrity sha512-TEbt+vaPFQ+xpxFLFssxUDXj5cWCxZJjIcB7Yg0k0GMHGtgtQgpvx/MUQUeAkNbA9AAGrwkAsoeItdTgS7FMyg==
-  dependencies:
-    "@types/body-parser" "*"
-    "@types/express-serve-static-core" "^4.17.18"
-    "@types/qs" "*"
-    "@types/serve-static" "*"
-
-"@types/express@^4.17.17":
+"@types/express@*", "@types/express@^4.17.14", "@types/express@^4.17.17":
   version "4.17.17"
-  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.17.tgz#01d5437f6ef9cfa8668e616e13c2f2ac9a491ae4"
+  resolved "http://npm-registry.conexa.ai/@types%2fexpress/-/express-4.17.17.tgz"
   integrity sha512-Q4FmmuLGBG58btUnfS1c1r/NQdlp3DMfGDGig8WhfpA2YRUtEkxAjkZb0yvplJGYdF1fsQ81iMDcH24sSCNC/Q==
   dependencies:
     "@types/body-parser" "*"
@@ -2072,7 +2053,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.43.0":
+"@typescript-eslint/utils@5.43.0", "@typescript-eslint/utils@^5.10.0":
   version "5.43.0"
   resolved "http://npm-registry.conexa.ai/@typescript-eslint%2futils/-/utils-5.43.0.tgz"
   integrity sha512-8nVpA6yX0sCjf7v/NDfeaOlyaIIqL7OaIGOWSPFqUKK59Gnumd3Wa+2l8oAaYO2lk0sO+SbWFWRSvhu8gLGv4A==
@@ -2363,20 +2344,20 @@ aws4@^1.8.0:
   resolved "http://npm-registry.conexa.ai/aws4/-/aws4-1.11.0.tgz"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.21.0:
-  version "0.21.4"
-  resolved "http://npm-registry.conexa.ai/axios/-/axios-0.21.4.tgz"
-  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
-  dependencies:
-    follow-redirects "^1.14.0"
-
-axios@^0.27.2:
+axios@0.27.2, axios@^0.27.2:
   version "0.27.2"
   resolved "http://npm-registry.conexa.ai/axios/-/axios-0.27.2.tgz"
   integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
   dependencies:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"
+
+axios@^0.21.0:
+  version "0.21.4"
+  resolved "http://npm-registry.conexa.ai/axios/-/axios-0.21.4.tgz"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+  dependencies:
+    follow-redirects "^1.14.0"
 
 axios@^1.1.2, axios@^1.2.2:
   version "1.2.3"
@@ -3621,6 +3602,13 @@ eslint-config-airbnb-typescript@^16.1.0:
   dependencies:
     eslint-config-airbnb-base "^15.0.0"
 
+eslint-config-airbnb-typescript@^17.0.0:
+  version "17.0.0"
+  resolved "http://npm-registry.conexa.ai/eslint-config-airbnb-typescript/-/eslint-config-airbnb-typescript-17.0.0.tgz"
+  integrity sha512-elNiuzD0kPAPTXjFWg+lE24nMdHMtuxgYoD30OyMD6yrW1AhFZPAg27VX7d3tzOErw+dgJTNWfRSDqEcXb4V0g==
+  dependencies:
+    eslint-config-airbnb-base "^15.0.0"
+
 eslint-config-prettier@^8.3.0:
   version "8.5.0"
   resolved "http://npm-registry.conexa.ai/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz"
@@ -3667,6 +3655,13 @@ eslint-plugin-jest@^25.3.0:
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
 
+eslint-plugin-jest@^27.1.7:
+  version "27.2.1"
+  resolved "http://npm-registry.conexa.ai/eslint-plugin-jest/-/eslint-plugin-jest-27.2.1.tgz"
+  integrity sha512-l067Uxx7ZT8cO9NJuf+eJHvt6bqJyz2Z29wykyEdz/OtmcELQl2MQGQLX8J94O1cSJWAwUSEvCjwjA7KEK3Hmg==
+  dependencies:
+    "@typescript-eslint/utils" "^5.10.0"
+
 eslint-plugin-prettier@^4.0.0:
   version "4.2.1"
   resolved "http://npm-registry.conexa.ai/eslint-plugin-prettier/-/eslint-plugin-prettier-4.2.1.tgz"
@@ -3674,7 +3669,7 @@ eslint-plugin-prettier@^4.0.0:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-security@^1.4.0:
+eslint-plugin-security@^1.4.0, eslint-plugin-security@^1.5.0:
   version "1.5.0"
   resolved "http://npm-registry.conexa.ai/eslint-plugin-security/-/eslint-plugin-security-1.5.0.tgz"
   integrity sha512-hAFVwLZ/UeXrlyVD2TDarv/x00CoFVpaY0IUZhKjPjiFxqkuQVixsK4f2rxngeQOqSxi6OUjzJM/jMwKEVjJ8g==
@@ -4206,7 +4201,7 @@ fs.realpath@^1.0.0:
 
 fsevents@^2.3.2, fsevents@~2.3.2:
   version "2.3.2"
-  resolved "http://npm-registry.conexa.ai/fsevents/-/fsevents-2.3.2.tgz"
+  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
 ftp@^0.3.10:
@@ -4433,6 +4428,31 @@ grapheme-splitter@^1.0.4:
   version "1.0.4"
   resolved "http://npm-registry.conexa.ai/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
+
+guatapay-sdk@^0.0.7:
+  version "0.0.7"
+  resolved "http://npm-registry.conexa.ai/guatapay-sdk/-/guatapay-sdk-0.0.7.tgz#fed5cf6c1f376c4453586d64066d872b62780fe1"
+  integrity sha512-XQvFtZ6e0PqtXviwNYXV4j3xTmjLHNCXhK+1lN4YIgeQ6aY6Fb8lnHd0OpVcxFcEy98v9zR02Hr8tPGEkhV0RQ==
+  dependencies:
+    "@commitlint/cli" "^17.2.0"
+    "@commitlint/config-conventional" "^17.2.0"
+    "@ryansonshine/commitizen" "^4.2.8"
+    "@ryansonshine/cz-conventional-changelog" "^3.3.4"
+    "@types/express" "^4.17.14"
+    axios "0.27.2"
+    crypto-js "^4.1.1"
+    eslint-config-airbnb-base "^15.0.0"
+    eslint-config-airbnb-typescript "^17.0.0"
+    eslint-plugin-jest "^27.1.7"
+    eslint-plugin-security "^1.5.0"
+    http-status "^1.5.3"
+    husky "^8.0.2"
+    joi "^17.6.3"
+    morgan "^1.10.0"
+    nock "^13.3.0"
+    react "^17.0.2"
+    standard-version "^9.5.0"
+    winston "^3.8.2"
 
 handlebars@^4.7.7:
   version "4.7.7"
@@ -5974,7 +5994,7 @@ netmask@^2.0.2:
   resolved "http://npm-registry.conexa.ai/netmask/-/netmask-2.0.2.tgz"
   integrity sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==
 
-nock@^13.2.9:
+nock@^13.2.9, nock@^13.3.0:
   version "13.3.0"
   resolved "http://npm-registry.conexa.ai/nock/-/nock-13.3.0.tgz"
   integrity sha512-HHqYQ6mBeiMc+N038w8LkMpDCRquCHWeNmN3v6645P3NhN2+qXOBqvPqo7Rt1VyCMzKhJ733wZqw5B7cQVFNPg==
@@ -7893,7 +7913,7 @@ vm2@^3.9.8:
 
 vtex-package-ts@^0.0.17:
   version "0.0.17"
-  resolved "http://npm-registry.conexa.ai/vtex-package-ts/-/vtex-package-ts-0.0.17.tgz#49fa67ddbceda6c88be7e994af026e87e6417fa5"
+  resolved "http://npm-registry.conexa.ai/vtex-package-ts/-/vtex-package-ts-0.0.17.tgz"
   integrity sha512-Fve7JYLuViWtycj6XQb8ppE4bUk50346tTCSsbe4iwWA5JSpqx4f6ySem0TE+IRFNh4dfSUUtmNIwqqZNZuPvw==
   dependencies:
     axios "^0.27.2"
