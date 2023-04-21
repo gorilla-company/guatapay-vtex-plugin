@@ -4,8 +4,7 @@ import { ITransactionInit } from '../../interfaces/transaction.interface';
 
 export const getTransactionsCount = () => {
   try {
-    const transactionsCount = Transaction.countDocuments({});
-    return transactionsCount;
+    return Transaction.countDocuments({});
   } catch (error) {
     Logger.error(error);
     throw error;

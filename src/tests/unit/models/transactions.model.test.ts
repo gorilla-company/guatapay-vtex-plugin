@@ -11,12 +11,5 @@ describe('Transaction Schema', () => {
     expect(transaction.orderId).toBe(transactionMock.orderId);
     expect(transaction.status).toBe(transactionMock.status);
     expect(transaction.vtexPaymentId).toBe(transactionMock.vtexPaymentId);
-    // expect(transaction.price).toBe(transactionMock.price);
-    // expect(transaction.vtexCallbackUrl).toBe(transactionMock.vtexCallbackUrl);
-    // expect(transaction.urlWindcave).toBe(transactionMock.urlWindcave);
-    // expect(transaction.transactionId).toBe(transactionMock.transactionId);
-    // expect(transaction.reference).toBe(transactionMock.reference);
-    // expect(transaction.merchantReference).toBe(transactionMock.merchantReference);
-    // expect(transaction.tid).toBe(transactionMock.tid);
   });
 });

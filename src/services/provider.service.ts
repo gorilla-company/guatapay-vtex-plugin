@@ -49,11 +49,11 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
     const payload = payloadToPaymentApp(paymentId, money.fiatAmount, money.fiatCurrency);
 
     const paymentAppData = {
-      appName: 'guatapay.vtex', // TODO: check if this name is correct
+      appName: 'guatapay.vtex',
       payload,
     };
 
-    const response = {
+    return {
       paymentId,
       paymentAppData,
       nsu,
@@ -66,8 +66,6 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
       delayToCancel: 600,
       delayToAutoSettle: 1,
     };
-
-    return response;
   } catch (err) {
     Logger.error('Could not create a new transaction');
     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a new transaction', JSON.stringify(err));
@@ -87,9 +85,8 @@ const getQuotation = async (currency: Currency, amount: string) => {
       amount: fiatQuote.amount,
       fee: buyerFees[1].expressedInFiat,
     };
-    const response = { crypto, fiat };
 
-    return response;
+    return { crypto, fiat };
   } catch (err) {
     Logger.error('Could not create a new quotation');
     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a new quotation', JSON.stringify(err));
@@ -132,9 +129,8 @@ const createIntentPayment = async (currency: Currency, paymentId: string) => {
     const { direction: address } = addressAccount;
     const crypto = { amount: cryptoAmount, fee: feesPayedInCrypto };
     const fiat = { amount: fiatAmount, fee: feesPayedInFiat };
-    const response = { address, crypto, fiat, paymentId };
 
-    return response;
+    return { address, crypto, fiat, paymentId };
   } catch (err) {
     Logger.error('Could not create a intent payment');
     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a intent payment', JSON.stringify(err));

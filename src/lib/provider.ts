@@ -9,8 +9,8 @@ const generateApiKey = async (username: string, password: string) => {
     'Content-Type': 'application/json',
     'User-Agent': 'Guatapay VTEX',
   };
-  const apiKey = await authService.getApiKey(username, { headers });
-  return apiKey;
+  // eslint-disable-next-line @typescript-eslint/return-await
+  return await authService.getApiKey(username, { headers });
 };
 
 const payloadToPaymentApp = (paymentId: string, total: string, currency: string) => {
@@ -48,13 +48,11 @@ const handlingToUpdateTransaction = async (
     fullInputAmount,
   };
 
-  const dataHandled = {
+  return {
     guatapayPaymentId,
     addressAccount,
     money,
   };
-
-  return dataHandled;
 };
 
 export { generateApiKey, handlingToUpdateTransaction, payloadToPaymentApp };
