@@ -3,6 +3,8 @@ import vtexPackage from 'vtex-package-ts';
 import { Request, Response } from 'express';
 import { customFields, paymentMethods as paymentMethodsAvailable } from '../config/manifest';
 import guatapayService from '../services/provider.service';
+import { findTransaction } from '../services/database/transaction.service';
+import { paymentInitResponse } from '../lib/provider';
 
 const { payments: vtex } = vtexPackage;
 
@@ -19,16 +21,22 @@ const paymentMethods = catchAsync(async (_req: Request, res: Response) => {
 const payments = catchAsync(async (req: Request, res: Response) => {
   Logger.info('==== VTEX INIT PAYMENT ====');
   const { body } = req;
+  const transactionFound = await findTransaction({ orderId: body.orderId });
+
+  if (transactionFound) {
+    Logger.error('Transaction already exists');
+    res.status(200).json(paymentInitResponse(transactionFound));
+    return;
+  }
+
   const merchantData = await vtex.getMerchantData(body, customFields);
-  const response = await guatapayService.initPayment(body, merchantData);
   Logger.info('==== MODAL IS OPEN ====');
-  res.status(200).send(response);
+  res.status(200).send(await guatapayService.initPayment(body, merchantData));
 });
 
 const cancellations = catchAsync(async (req: Request, res: Response) => {
-  Logger.info('==== CANCELLATION ====');
-  const { payload, status } = vtex.cancellationPaymentResponse(req.body);
-  Logger.error('==== CANCELLATION MUST BE DONE MANUALLY ====');
+  Logger.info('==== VTEX INIT CANCELLATION ====');
+  const { payload, status } = await guatapayService.createCancellation(req.body);
   res.status(status).send(payload);
 });
 
