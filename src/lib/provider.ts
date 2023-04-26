@@ -55,7 +55,7 @@ const handlingToUpdateTransaction = async (
   };
 };
 
-const paymentInitResponse = (transaction: ITransactionInit) => {
+const initPaymentResponse = (transaction: ITransactionInit) => {
   const { vtexPaymentId: paymentId, nsu, tid, authorizationId, money, vtexStatus } = transaction;
   const payload = payloadToPaymentApp(paymentId, money.fiatAmount, money.fiatCurrency);
 
@@ -78,4 +78,4 @@ const paymentInitResponse = (transaction: ITransactionInit) => {
   };
 };
 
-export { generateApiKey, handlingToUpdateTransaction, payloadToPaymentApp, paymentInitResponse };
+export { generateApiKey, handlingToUpdateTransaction, payloadToPaymentApp, initPaymentResponse };

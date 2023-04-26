@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import { customFields, paymentMethods as paymentMethodsAvailable } from '../config/manifest';
 import guatapayService from '../services/provider.service';
 import { findTransaction } from '../services/database/transaction.service';
-import { paymentInitResponse } from '../lib/provider';
+import { initPaymentResponse } from '../lib/provider';
 
 const { payments: vtex } = vtexPackage;
 
@@ -25,7 +25,7 @@ const payments = catchAsync(async (req: Request, res: Response) => {
 
   if (transactionFound) {
     Logger.error('Transaction already exists');
-    res.status(200).json(paymentInitResponse(transactionFound));
+    res.status(200).json(initPaymentResponse(transactionFound));
     return;
   }
 

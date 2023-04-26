@@ -10,7 +10,7 @@ import ApiError from '../lib/ApiError';
 import { ITransactionInit } from '../interfaces/transaction.interface';
 import { createTransaction, findTransaction } from './database/transaction.service';
 import config from '../config/config';
-import { handlingToUpdateTransaction, paymentInitResponse } from '../lib/provider';
+import { handlingToUpdateTransaction, initPaymentResponse } from '../lib/provider';
 
 const { payments: vtex } = vtexPackage;
 
@@ -51,7 +51,7 @@ const initPayment = async (vtexPaymentBody: IVtexPayment, merchantData: IMerchan
 
     await createTransaction(transaction);
 
-    return paymentInitResponse(transaction);
+    return initPaymentResponse(transaction);
   } catch (err) {
     Logger.error('Could not create a new transaction');
     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a new transaction', JSON.stringify(err));
