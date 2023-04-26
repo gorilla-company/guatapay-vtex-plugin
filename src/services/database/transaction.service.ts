@@ -1,5 +1,4 @@
 import { Logger } from 'conexa-core-server';
-// import { Status } from 'guatapay-sdk/dist/interfaces/client.interfaces';
 import Transaction from '../../models/Transaction.model';
 import { ITransactionInit } from '../../interfaces/transaction.interface';
 
