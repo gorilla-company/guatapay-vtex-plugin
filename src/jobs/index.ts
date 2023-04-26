@@ -4,7 +4,7 @@ import { findAllPendingTransactions } from '../services/database/transaction.ser
 import guatapayService from '../services/provider.service';
 import config from '../config/config';
 
-const guatapayPaymentJob = new CronJob.CronJob('*/1 * * * *', async () => {
+export const guatapayPaymentJob = new CronJob.CronJob('*/1 * * * *', async () => {
   Logger.info('----|  Running Guatapay Payment Status Cron  |----');
   const pendingTransactions = await findAllPendingTransactions();
 
@@ -20,7 +20,7 @@ const guatapayPaymentJob = new CronJob.CronJob('*/1 * * * *', async () => {
   return true;
 });
 
-function initCron() {
+export default function initCron() {
   if (config.env === 'test') return;
   Logger.info('----|  Running Crons  |----');
   try {
@@ -31,5 +31,3 @@ function initCron() {
     console.log(error);
   }
 }
-
-export default initCron;

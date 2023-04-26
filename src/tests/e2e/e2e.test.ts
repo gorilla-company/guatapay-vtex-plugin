@@ -13,11 +13,11 @@ import { userMock } from '../mocks/database/user';
 import User from '../../models/User.model';
 import Transaction from '../../models/Transaction.model';
 import { transactionMock } from '../mocks/database/transaction';
+import { guatapayPaymentJob } from '../../jobs';
 
 const api = supertest(app);
 const apiRoute: string = '/api/v1';
 
-// setupVtexApi();
 /// ///////////////////////////////////////////////////////
 /// /////////////   VITALS FUNCTIONS   ////////////////
 /// ///////////////////////////////////////////////////////
@@ -140,6 +140,9 @@ describe('Payments functions', () => {
 /// ///////////////////////////////////////////////////////
 /// /////////////   WEBHOOK FUNCTIONS   ////////////////
 /// ///////////////////////////////////////////////////////
-// describe('IPN functions', () => {
-//   // TODO: Implement IPN function
-// });
+describe('Cron functions', () => {
+  test('Should guatapayPaymentJob start', () => {
+    guatapayPaymentJob.start();
+    guatapayPaymentJob.stop();
+  });
+});
