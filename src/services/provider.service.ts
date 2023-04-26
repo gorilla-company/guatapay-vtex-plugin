@@ -3,7 +3,7 @@ import httpStatus from 'http-status';
 import { tradesServices, ClientSDK, authService } from 'guatapay-sdk';
 import vtexPackage from 'vtex-package-ts';
 import { ICancellationPayload, IVtexNotifyPaymentPayload } from 'vtex-package-ts/dist/interfaces';
-import { Currency } from 'guatapay-sdk/dist/interfaces/client.interfaces';
+import { Currency, Status } from 'guatapay-sdk/dist/interfaces/client.interfaces';
 import { IMerchantData, IVtexPayment } from '@/interfaces/payment.interface';
 import { findUser, createUser } from './database/user.service';
 import ApiError from '../lib/ApiError';
@@ -133,7 +133,7 @@ const updatePayment = async (vtexPaymentId: string) => {
     const payment = await tradesServices.getPaymentStatus(dbTransaction.guatapayPaymentId);
 
     if (payment.status === 'pending')
-      return Logger.info(`Payment intent with id ${vtexPaymentId} is still pending`);
+      return Logger.info(`Intent payment with vtexId ${vtexPaymentId} is still pending`);
 
     dbTransaction.guatapayStatus = payment.status;
     dbTransaction.money.amountPayed = payment.amountPayed;
@@ -147,13 +147,19 @@ const updatePayment = async (vtexPaymentId: string) => {
       status: dbTransaction.vtexStatus,
     };
 
-    Logger.info(`Payment with id ${vtexPaymentId} was ${payment.status}`);
+    Logger.info(`Intent payment with vtexId ${vtexPaymentId} was ${payment.status}`);
     return await vtex.notifyPaymentStatus(vtexAuth, dbTransaction.vtexCallbackUrl, vtexBody);
   } catch (err: any) {
-    Logger.error(err);
-    Logger.error(`Payment intent with vtexId ${vtexPaymentId} is expired`);
-    dbTransaction.guatapayStatus = 'expired';
-    return await dbTransaction.save();
+    const expired: Status = 'expired';
+
+    if (err.message.includes(expired)) {
+      Logger.error(`Intent payment with vtexId ${vtexPaymentId} is expired`);
+      dbTransaction.guatapayStatus = expired;
+      return await dbTransaction.save();
+    }
+
+    Logger.error('Could not update a intent payment');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a intent payment', JSON.stringify(err));
   }
 };
 
