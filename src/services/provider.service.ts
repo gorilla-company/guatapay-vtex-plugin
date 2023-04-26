@@ -110,11 +110,11 @@ const createIntentPayment = async (currency: Currency, vtexPaymentId: string) =>
     await dbTransaction.save();
 
     const { cryptoAmount, feesPayedInCrypto, fiatAmount, feesPayedInFiat } = money;
-    const { direction: address } = addressAccount;
+    const { direction: qrString } = addressAccount;
     const crypto = { amount: cryptoAmount, fee: feesPayedInCrypto };
     const fiat = { amount: fiatAmount, fee: feesPayedInFiat };
 
-    return { address, crypto, fiat, paymentId: vtexPaymentId };
+    return { qrString, crypto, fiat, paymentId: vtexPaymentId };
   } catch (err) {
     Logger.error('Could not create a intent payment');
     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a intent payment', JSON.stringify(err));
