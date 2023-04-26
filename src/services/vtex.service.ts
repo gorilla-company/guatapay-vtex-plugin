@@ -14,9 +14,6 @@ const delayedCallbackResponse = async (
 ) => {
   await twoSecondsDelay();
 
-  // eslint-disable-next-line no-console
-  console.log('two seconds');
-
   const body = {
     paymentId,
     tid: paymentId,
@@ -32,28 +29,11 @@ const delayedCallbackResponse = async (
     },
   });
 
-  // eslint-disable-next-line no-console
-  console.log({ response });
-
   return response;
 };
 
 const makeVtexPayment = async (callbackUrl: string, paymentId: string, headers: IncomingHttpHeaders) => {
-  // const resBody = {
-  //     paymentId,
-  //     status: 'approved',
-  //     callbackUrl,
-  //     returnUrl,
-  //     paymentUrl: 'https://www.conexa.ai',
-  //     tid: 'PaymentIntentionID - 129838723874',
-  //     authorizationId: 'authID - 0001',
-  //     nsu: `NSU-authUID - 001`,
-  // };
-  // const { API_URL } = process.env;
-  // console.log(API_URL);
-
   await delayedCallbackResponse(callbackUrl, paymentId, headers);
-  // await axios.post(`${API_URL}/api/v1/vtex/payments/delay`, resBody);
 };
 
 export { twoSecondsDelay, delayedCallbackResponse, makeVtexPayment };

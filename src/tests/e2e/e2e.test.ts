@@ -62,7 +62,6 @@ describe('Payments functions', () => {
 
   describe('Payment process', () => {
     it('Should return 500 with invalid merchant data', async () => {
-      // eslint-disable-next-line no-new
       await User.create(userMock);
 
       await api
@@ -72,9 +71,7 @@ describe('Payments functions', () => {
         .expect('Content-Type', /application\/json/);
     });
 
-    // TODO: check what do with the appKey
     it('Should return 200 and correct props', async () => {
-      // eslint-disable-next-line no-new
       await User.create(userMock);
       await api
         .post(`${apiRoute}/vtex/payments`)
