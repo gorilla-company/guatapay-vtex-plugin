@@ -1,10 +1,10 @@
 import { ITransaction } from '@/interfaces/transaction.interface';
 
 export const transactionMock: ITransaction = {
-  username: 'conexa@user',
+  username: 'andres@conexa.ai',
   apiKey: '123',
   orderId: '123',
-  vtexPaymentId: '123',
+  vtexPaymentId: 'eef1df2b-3af4-4dcf-baba-d87s020b46a14',
   vtexTransactionId: '123',
   vtexCallbackUrl: 'url',
   reference: 'reference',

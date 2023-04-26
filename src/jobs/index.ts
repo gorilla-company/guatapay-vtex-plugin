@@ -2,6 +2,7 @@ import CronJob from 'cron';
 import { Logger } from 'conexa-core-server';
 import { findAllPendingTransactions } from '../services/database/transaction.service';
 import guatapayService from '../services/provider.service';
+import config from '../config/config';
 
 const guatapayPaymentJob = new CronJob.CronJob('*/1 * * * *', async () => {
   Logger.info('----|  Running Guatapay Payment Status Cron  |----');
@@ -20,6 +21,7 @@ const guatapayPaymentJob = new CronJob.CronJob('*/1 * * * *', async () => {
 });
 
 function initCron() {
+  if (config.env === 'test') return;
   Logger.info('----|  Running Crons  |----');
   try {
     guatapayPaymentJob.start();

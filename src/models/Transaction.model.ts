@@ -22,7 +22,7 @@ const TransactionSchema = new mongoose.Schema<ITransaction>(
     },
     money: {
       cryptoCurrency: { type: String, default: null },
-      cryptoAmount: { type: String, default: null },
+      cryptoAmount: { type: Number, default: null },
       feesPayedInCrypto: { type: Number, default: null },
       fiatCurrency: { type: String },
       fiatAmount: { type: String },
