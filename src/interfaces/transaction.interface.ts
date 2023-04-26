@@ -1,4 +1,6 @@
-import { Status, Currency } from './client.interface';
+import { Status, Currency } from 'guatapay-sdk/dist/interfaces/client.interfaces';
+
+type GuatapayStatus = Status | 'init';
 
 export interface ITransactionInit {
   username: string;
@@ -8,7 +10,8 @@ export interface ITransactionInit {
   vtexTransactionId: string;
   vtexCallbackUrl: string;
   reference: string;
-  status: Status;
+  vtexStatus: 'undefined' | 'approved' | 'denied';
+  guatapayStatus: GuatapayStatus;
   nsu: string;
   tid: string;
   authorizationId: string;

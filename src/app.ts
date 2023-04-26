@@ -12,6 +12,8 @@ import config from './config/config';
 import routes from './routes/index.routes';
 import ApiError from './lib/ApiError';
 
+import initCron from './jobs/index';
+
 // Initialize Conexa Core Server
 configure({
   secretKey: config.cryptojsKey,
@@ -63,5 +65,7 @@ app.use(errorConverter);
 
 // handle error
 app.use(errorHandler);
+
+initCron();
 
 export default app;

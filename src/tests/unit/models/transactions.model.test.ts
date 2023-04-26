@@ -9,7 +9,6 @@ describe('Transaction Schema', () => {
     const transaction = await Transaction.create(transactionMock);
     expect(transaction.apiKey).toBe(transactionMock.apiKey);
     expect(transaction.orderId).toBe(transactionMock.orderId);
-    expect(transaction.status).toBe(transactionMock.status);
     expect(transaction.vtexPaymentId).toBe(transactionMock.vtexPaymentId);
   });
 });
