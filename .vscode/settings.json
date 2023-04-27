@@ -1,0 +1,17 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#440637",
+    "titleBar.activeBackground": "#4e084a",
+    "titleBar.activeForeground": "#EBFEF7"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "typescript"
+  ],
+  "cSpell.words": [
+    "Guatapay",
+    "vtex"
+  ],
+}

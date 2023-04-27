@@ -1,0 +1,2012 @@
+{
+	"info": {
+		"_postman_id": "2cb67042-b99c-4a49-9d96-9e1e408da93e",
+		"name": "OCA - Tiendanube",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23262912"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "OAuth Tiendanube",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/auth?code={{code}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "{{code}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Onboarding",
+			"item": [
+				{
+					"name": "Initial-state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/onboarding/initial-state?userId={{userId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"onboarding",
+								"initial-state"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Initial-state",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/onboarding/initial-state?userId={{userId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"onboarding",
+										"initial-state"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a-+lgf4z/I7/B6zJj47pJqZ4EIUmA\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Oct 2022 21:03:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Estado inicial obtenido correctamente\",\n    \"code\": \"onboarding.initial_state\",\n    \"alertDisabled\": true,\n    \"data\": {\n        \"userId\": \"909516\",\n        \"storeName\": \"conexa tech\",\n        \"storeUrl\": \"https://conexatech.com\",\n        \"packageSettings\": {\n            \"width\": 123,\n            \"height\": 222,\n            \"length\": 333\n        },\n        \"dispatchSettings\": {\n            \"defaultStoreId\": \"909516\",\n            \"defaultDispatchType\": \"home\", //store / home\n            \"activeDays\": [\n                {\"day\": 1, \"active\": false},\n                {\"day\": 2, \"active\": false},\n                {\"day\": 3, \"active\": false},\n                {\"day\": 4, \"active\": false},\n                {\"day\": 5, \"active\": false},\n                {\"day\": 6, \"active\": false}\n            ],\n        \"defaultTimeRange\": \"morning\" //morning / afternoon\n        },\n        \"shippingSettings\": {\n            \"doorToDoor\": 1000,\n            \"doorToStore\": 2000,\n            \"storeToStore\": 3000,\n            \"storeToDoor\": 4000\n        },\n        \"remitter\": {\n            \"firstName\": \"Pedro\",\n            \"lastName\": \"Lopez\",\n            \"companyName\": \"Prueba\",\n            \"cuit\": \"27354324569\",\n            \"address\": {\n                \"province\": \"Buenos Aires\",\n                \"locality\": \"Pinamar\",\n                \"number\": \"124\",\n                \"street\": \"Las Palmas\",\n                \"floor\": \"\",\n                \"apartment\": \"\",\n                \"postalCode\": \"1427\"\n            }//shipping.address\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Nearby Stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/onboarding/nearby-stores?userId={{userId}}&postalCode={{postalCode}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"onboarding",
+								"nearby-stores"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								},
+								{
+									"key": "postalCode",
+									"value": "{{postalCode}}"
+								},
+								{
+									"key": null,
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Nearby Stores",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/onboarding/nearby-stores?userId={{userId}}&postalCode={{postalCode}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"onboarding",
+										"nearby-stores"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "postalCode",
+											"value": "{{postalCode}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a-+lgf4z/I7/B6zJj47pJqZ4EIUmA\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Oct 2022 21:03:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"OK\",\n    \"data\": [\n        {\n            \"name\": \"Cabildo 550\",\n            \"address\": {\n                \"province\": \"Buenos Aires\",\n                \"locality\": \"Pinamar\",\n                \"number\": \"550\",\n                \"street\": \"Cabildo\",\n                \"postalCode\": \"1427\"\n            }\n        },\n        {\n            \"name\": \"Saavedra 1876\",\n            \"address\": {\n                \"province\": \"Buenos Aires\",\n                \"locality\": \"Pinamar\",\n                \"number\": \"1876\",\n                \"street\": \"Saavedra\",\n                \"postalCode\": \"1427\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": 10000,\r\n    \"email\" : \"prueba@conexa.ai\",\r\n    \"password\": \"6#$rads_xx\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/onboarding/auth?userId={{userId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"onboarding",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Authenticate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"accountNumber\": 10000,\r\n    \"email\" : \"prueba@conexa.ai\",\r\n    \"password\": \"6#$rads_xx\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/onboarding/auth?userId={{userId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"onboarding",
+										"auth"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-65NQd02B+HfxL9YVbY3ZEoc+Ckg\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 16:45:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": \"onboarding.authenticated\",\n    \"message\": \"Authentication successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Merchant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"printReceipt\": true, //false\r\n    \"packageSettings\": {\r\n        \"width\": 123,\r\n        \"height\": 222,\r\n        \"length\": 333\r\n    },\r\n    \"dispatchSettings\": {\r\n        \"defaultStoreId\": \"\",\r\n        \"defaultDispatchType\": \"\", //store / home\r\n        \"activeDays\": [\r\n            {\"day\": 1, \"active\": false},\r\n            {\"day\": 2, \"active\": false},\r\n            {\"day\": 3, \"active\": false},\r\n            {\"day\": 4, \"active\": false},\r\n            {\"day\": 5, \"active\": false},\r\n            {\"day\": 6, \"active\": false}\r\n        ],\r\n    \"defaultTimeRange\": \"\" //morning / afternoon\r\n    },\r\n    \"shippingSettings\": {\r\n        \"doorToDoor\": 1000,\r\n        \"doorToStore\": 2000,\r\n        \"storeToStore\": 3000,\r\n        \"storeToDoor\": 4000\r\n    },\r\n    \"remitter\": {\r\n        \"firstName\": \"Pedro\",\r\n        \"lastName\": \"Lopez\",\r\n        \"companyName\": \"Prueba\",\r\n        \"cuit\": \"27354324569\",\r\n        \"address\": {\r\n            \"province\": \"Buenos Aires\",\r\n            \"locality\": \"Pinamar\",\r\n            \"number\": \"124\",\r\n            \"street\": \"Las Palmas\",\r\n            \"floor\": \"\",\r\n            \"apartment\": \"\",\r\n            \"postalCode\": \"1427\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/user?userId={{userId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Merchant",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"printReceipt\": true, //false\r\n    \"packageSettings\": {\r\n        \"width\": 123,\r\n        \"height\": 222,\r\n        \"length\": 333\r\n    },\r\n    \"dispatchSettings\": {\r\n        \"defaultStoreId\": \"\",\r\n        \"defaultDispatchType\": \"\", //store / home\r\n        \"activeDays\": [\r\n            {\"day\": 1, \"active\": false},\r\n            {\"day\": 2, \"active\": false},\r\n            {\"day\": 3, \"active\": false},\r\n            {\"day\": 4, \"active\": false},\r\n            {\"day\": 5, \"active\": false},\r\n            {\"day\": 6, \"active\": false}\r\n        ],\r\n    \"defaultTimeRange\": \"\" //morning / afternoon\r\n    },\r\n    \"shippingSettings\": {\r\n        \"doorToDoor\": 1000,\r\n        \"doorToStore\": 2000,\r\n        \"storeToStore\": 3000,\r\n        \"storeToDoor\": 4000\r\n    },\r\n    \"remitter\": {\r\n        \"firstName\": \"Pedro\",\r\n        \"lastName\": \"Lopez\",\r\n        \"companyName\": \"Prueba\",\r\n        \"cuit\": \"27354324569\",\r\n        \"address\": {\r\n            \"province\": \"Buenos Aires\",\r\n            \"locality\": \"Pinamar\",\r\n            \"number\": \"124\",\r\n            \"street\": \"Las Palmas\",\r\n            \"floor\": \"\",\r\n            \"apartment\": \"\",\r\n            \"postalCode\": \"1427\"\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/user?userId={{userId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"user"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1054"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41e-8sofcyGHHzBZKIqvxDoQBRKONEE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 16:45:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": \"onboarding.update_merchant\",\n    \"message\": \"Updated successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Webhooks",
+			"item": [
+				{
+					"name": "Order Tiendanube",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"store_id\": \"{{userId}}\",\r\n    \"event\": \"{{webhookEvent}}\",\r\n    \"id\": \"{{orderId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/webhooks/tiendanube",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"webhooks",
+								"tiendanube"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Order Tiendanube",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"store_id\": \"{{userId}}\",\r\n    \"event\": \"{{webhookEvent}}\",\r\n    \"id\": \"{{orderId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/webhooks/tiendanube",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"webhooks",
+										"tiendanube"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5e1-cGbOID18L9GVDOagEoWIN5EEGlo\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 17:33:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Evento create para orden 9098765435 registrado correctamente\",\n    \"data\": {\n        \"event\": \"create\",\n        \"id\": \"9098765435\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Panel",
+			"item": [
+				{
+					"name": "Get Orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/orders?userId={{userId}}&limit={{limit}}&offset={{offset}}&from={{from}}&sort={{sort}}&dateFrom={{dateFrom}}&dateTo={{dateTo}}&status={{status}}&delivery={{delivery}}&tag={{tag}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}"
+								},
+								{
+									"key": "offset",
+									"value": "{{offset}}"
+								},
+								{
+									"key": "from",
+									"value": "{{from}}"
+								},
+								{
+									"key": "sort",
+									"value": "{{sort}}"
+								},
+								{
+									"key": "dateFrom",
+									"value": "{{dateFrom}}"
+								},
+								{
+									"key": "dateTo",
+									"value": "{{dateTo}}"
+								},
+								{
+									"key": "status",
+									"value": "{{status}}"
+								},
+								{
+									"key": "delivery",
+									"value": "{{delivery}}"
+								},
+								{
+									"key": "tag",
+									"value": "{{tag}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/orders?userId={{userId}}&limit={{limit}}&offset={{offset}}&from={{from}}&sort={{sort}}&dateFrom={{dateFrom}}&dateTo={{dateTo}}&status={{status}}&delivery={{delivery}}&tag={{tag}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "limit",
+											"value": "{{limit}}"
+										},
+										{
+											"key": "offset",
+											"value": "{{offset}}"
+										},
+										{
+											"key": "from",
+											"value": "{{from}}"
+										},
+										{
+											"key": "sort",
+											"value": "{{sort}}"
+										},
+										{
+											"key": "dateFrom",
+											"value": "{{dateFrom}}"
+										},
+										{
+											"key": "dateTo",
+											"value": "{{dateTo}}"
+										},
+										{
+											"key": "status",
+											"value": "{{status}}"
+										},
+										{
+											"key": "delivery",
+											"value": "{{delivery}}"
+										},
+										{
+											"key": "tag",
+											"value": "{{tag}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"558-VY1UcJB4Uok0zxQObtbLAd8OOdQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 17:41:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"OK\",\n    \"data\": [{\n            \"orderId\": \"a1b2c3\",\n            \"orderNumber\": 1000,\n            \"shippingAddress\": {\n                \"province\": \"Buenos Aires\",\n                \"locality\": \"Pinamar\",\n                \"number\": \"124\",\n                \"street\": \"Las Palmas\",\n                \"floor\": \"\",\n                \"apartment\": \"\",\n                \"postalCode\": \"1427\"\n                },\n            \"packageSettings\": {\n                \"width\": 123,\n                \"height\": 222,\n                \"length\": 333\n            },\n            \"trackingStatus\": \"collected\",\n            \"dispatchType\": \"home\" //store / home\n        },\n        {\n            \"orderId\": \"a1b2c3\",\n            \"orderNumber\": 1001,\n            \"shippingAddress\": {\n                \"province\": \"Buenos Aires\",\n                \"locality\": \"Pinamar\",\n                \"number\": \"124\",\n                \"street\": \"Las Palmas\",\n                \"floor\": \"\",\n                \"apartment\": \"\",\n                \"postalCode\": \"1427\"\n                },\n            \"packageSettings\": {\n                \"width\": 123,\n                \"height\": 222,\n                \"length\": 333\n            },\n            \"trackingStatus\": \"created\",\n            \"dispatchType\": \"store\" //store / home\n        }\n    ]\n  \n}"
+						}
+					]
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/order?userId={{userId}}&orderId={{orderId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"order"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								},
+								{
+									"key": "orderId",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Order",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/order?userId={{userId}}&orderId={{orderId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"order"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "orderId",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"558-VY1UcJB4Uok0zxQObtbLAd8OOdQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 18:02:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"OK\",\n    \"data\":\n        {\n            \"orderId\": \"a1b2c3\",\n            \"orderNumber\": 1000,\n            \"items\":[\n                {\n                    \"name\": \"CAMISETA UNDER ARMOUR ESTUDIANTES DE LA PLATA\",\n                    \"price\": \"900.00\"\n                },\n                {\n                    \"name\": \"Pelota adidas\",\n                    \"price\": \"1900.00\"\n            }],\n            \"totalSpent\": \"2345.00\",\n            \"subtotal\": \"2000.00\",\n            \"shippingCost\": \"345.00\", //definir donde\n            \"shippingAddress\": {\n                \"province\": \"Buenos Aires\",\n                \"locality\": \"Pinamar\",\n                \"number\": \"124\",\n                \"street\": \"Las Palmas\",\n                \"floor\": \"\",\n                \"apartment\": \"\",\n                \"postalCode\": \"1427\",\n                \"cuit\": \"20-324354567-5\",\n                \"company\": \"conexa\"\n            },\n            \"packageSettings\": {\n                \"width\": 123,\n                \"height\": 222,\n                \"length\": 333,\n                \"bulks\": 1 // donde se almacena\n            }\n        }\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //updated keys \r\n    \"destination\": {\r\n        \"province\": \"Buenos Aires\",\r\n        \"locality\": \"Bahía Blanca\",\r\n        \"number\": \"129\",\r\n        \"street\": \"Las Palmas\",\r\n        \"floor\": \"\",\r\n        \"apartment\": \"\",\r\n        \"postalCode\": \"8000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/order?userId={{userId}}&orderId={{orderId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"order"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								},
+								{
+									"key": "orderId",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Order",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    //updated keys \r\n    \"destination\": {\r\n        \"province\": \"Buenos Aires\",\r\n        \"locality\": \"Bahía Blanca\",\r\n        \"number\": \"129\",\r\n        \"street\": \"Las Palmas\",\r\n        \"floor\": \"\",\r\n        \"apartment\": \"\",\r\n        \"postalCode\": \"8000\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/order?userId={{userId}}&orderId={{orderId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"order"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "orderId",
+											"value": "{{orderId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1052"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41c-mBAWgD2TKMVNu0i9r94vtDfth9c\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 18:32:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Orden #1000 actualizada correctamente\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel Orders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderIds\": [{{orderIds}}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/orders/cancel?userId={{userId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"orders",
+								"cancel"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cancel Orders",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orderIds\": [{{orderIds}}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/orders/cancel?userId={{userId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"orders",
+										"cancel"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1054"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41e-ko61EUswvadHV+EOIvXW3cvaxfk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 18:37:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Las ordenes fueron canceladas correctamente.\",\n    \"data\": [{\n        \"orderNumber\": 1000,\n        \"status\": \"success\"\n        },\n        {\n        \"orderNumber\": 1001,\n        \"status\": \"failed\"\n        },\n        {\n        \"orderNumber\": 1002,\n        \"status\": \"success\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Orders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderIds\": [{{orderIds}}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/orders?userId={{userId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Orders",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orderIds\": [{{orderIds}}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/orders?userId={{userId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1054"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41e-ko61EUswvadHV+EOIvXW3cvaxfk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 20:09:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Las ordenes fueron creadas correctamente.\",\n    \"data\": [{\n            \"orderNumber\": 1000,\n            \"status\": \"success\"\n        },\n        {\n            \"orderNumber\": 1001,\n            \"status\": \"failed\"\n        },\n        {\n            \"orderNumber\": 1002,\n            \"status\": \"success\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Downloads Labels",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderIds\": [{{ordersIds}}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/orders/labels?userId={{userId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"orders",
+								"labels"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/orders/?store={{userId}}&id=544746758&id=544746759",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "store",
+									"value": "{{userId}}"
+								},
+								{
+									"key": "id",
+									"value": "544746758"
+								},
+								{
+									"key": "id",
+									"value": "544746759"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/orders/?store={{userId}}&id=544746758&id=544746759",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"orders",
+										""
+									],
+									"query": [
+										{
+											"key": "store",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "id",
+											"value": "544746758"
+										},
+										{
+											"key": "id",
+											"value": "544746759"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"558-VY1UcJB4Uok0zxQObtbLAd8OOdQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 20:09:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Las ordenes fueron creadas correctamente.\",\n    \"data\": [{\n            \"orderNumber\": 1000,\n            \"status\": \"success\"\n        },\n        {\n            \"orderNumber\": 1001,\n            \"status\": \"failed\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Merchant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"printReceipt\": true //false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/v1/panel/user?userId={{userId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Merchant",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"printReceipt\": true //false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/api/v1/panel/user?userId={{userId}}",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"panel",
+										"user"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1054"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41e-GFFrvGrw/jVDh9MUD2XemlLcq6I\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Oct 2022 18:40:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Updated successfully\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiUrl",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "orderId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "code",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "ordersIds",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "limit",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "offset",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "from",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "sort",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "dateFrom",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "dateTo",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "status",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "delivery",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "tag",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "postalCode",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

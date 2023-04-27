@@ -1,0 +1,32 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - test
+  - build
+  - deploy
+
+tests:
+  stage: test
+  script:
+    - yarn
+    - cp .env.example .env
+    - yarn test
+
+build:
+  stage: build
+  script:
+    - yarn lint
+    - yarn build
+
+# Deploy docs to Gitlab pages
+deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - echo "Define your deployment script!"
+  environment: production
