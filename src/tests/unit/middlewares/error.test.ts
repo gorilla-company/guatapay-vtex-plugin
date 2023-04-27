@@ -4,7 +4,6 @@ import httpMocks from 'node-mocks-http';
 import { errorConverter } from '../../../middlewares/error.middleware';
 import ApiError from '../../../lib/ApiError';
 
-
 describe('Error middlewares', () => {
   describe('Error converter', () => {
     test('should return the same ApiError object it was called with', () => {
@@ -98,6 +97,4 @@ describe('Error middlewares', () => {
       );
     });
   });
-
-  
 });

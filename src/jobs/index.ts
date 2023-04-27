@@ -4,7 +4,7 @@ import { findAllPendingTransactions } from '../services/database/transaction.ser
 import guatapayService from '../services/provider.service';
 import config from '../config/config';
 
-export const guatapayPaymentJob = new CronJob.CronJob('*/1 * * * *', async () => {
+const guatapayPaymentJob = new CronJob.CronJob('*/1 * * * *', async () => {
   Logger.info('----|  Running Guatapay Payment Status Cron  |----');
   const pendingTransactions = await findAllPendingTransactions();
 

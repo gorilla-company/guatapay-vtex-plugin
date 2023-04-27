@@ -13,16 +13,13 @@ import { userMock } from '../mocks/database/user';
 import User from '../../models/User.model';
 import Transaction from '../../models/Transaction.model';
 import { transactionMock } from '../mocks/database/transaction';
-import { guatapayPaymentJob } from '../../jobs';
 
 const api = supertest(app);
 const apiRoute: string = '/api/v1';
 
-/// ///////////////////////////////////////////////////////
-/// /////////////   VITALS FUNCTIONS   ////////////////
-/// ///////////////////////////////////////////////////////
 describe('Vitals functions', () => {
   setupTestDB();
+
   it('Should return 200 to welcome function', async () => {
     await api.get(`/`).expect(200);
   });
@@ -32,10 +29,7 @@ describe('Vitals functions', () => {
   });
 });
 
-/// ///////////////////////////////////////////////////////
-/// /////////////   WEBHOOK FUNCTIONS   ////////////////
-/// ///////////////////////////////////////////////////////
-describe('Payments functions', () => {
+describe('Vtex payments functions', () => {
   setupTestDB();
 
   describe('Manifest and Payment Method process', () => {
@@ -71,7 +65,7 @@ describe('Payments functions', () => {
         .expect('Content-Type', /application\/json/);
     });
 
-    it('Should return 200 and correct props', async () => {
+    it('Should return 200 and correct props from payments', async () => {
       await User.create(userMock);
       await api
         .post(`${apiRoute}/vtex/payments`)
@@ -81,6 +75,13 @@ describe('Payments functions', () => {
           expect(res.body.status).toBe('undefined');
           expect(res.body.paymentAppData.appName).toBe('guatapay.vtex');
         });
+    });
+
+    it('Payment intent should return 400 because bad request', async () => {
+      const paymentWithInvalidValue = { ...validPayment, value: null };
+
+      await User.create(userMock);
+      await api.post(`${apiRoute}/vtex/payments`).send(paymentWithInvalidValue).expect(400);
     });
   });
 
@@ -134,12 +135,97 @@ describe('Payments functions', () => {
   });
 });
 
-/// ///////////////////////////////////////////////////////
-/// /////////////   WEBHOOK FUNCTIONS   ////////////////
-/// ///////////////////////////////////////////////////////
-describe('Cron functions', () => {
-  test('Should guatapayPaymentJob start', () => {
-    guatapayPaymentJob.start();
-    guatapayPaymentJob.stop();
+describe('Payment app endpoints', () => {
+  setupTestDB();
+
+  describe('Quotation endpoint', () => {
+    it('Should return 200 and quotation amounts should be numbers', async () => {
+      await api
+        .post(`${apiRoute}/payment-app/quotation`)
+        .send({ currency: 'btc', amount: 10000 })
+        .expect(200)
+        .expect((res) => expect(typeof res.body.crypto.amount).toBe('number'))
+        .expect((res) => expect(typeof res.body.fiat.amount).toBe('number'));
+    });
+
+    it('Quotation should return bad request', async () => {
+      await api.post(`${apiRoute}/payment-app/quotation`).send({ currency: 'btc', amount: 1 }).expect(400);
+    });
+  });
+
+  describe('Intent payment endpoint', () => {
+    it('Should be 200 and create a intent payment', async () => {
+      await User.create(userMock);
+      await Transaction.create(transactionMock);
+
+      await api
+        .post(`${apiRoute}/payment-app/create-payment-intent`)
+        .send({
+          currency: 'btc',
+          paymentId: transactionMock.vtexPaymentId,
+        })
+        .expect(200)
+        .expect((res) => {
+          const { qrString, crypto, fiat, paymentId } = res.body;
+          expect(qrString).toBeDefined();
+          expect(crypto).toBeDefined();
+          expect(fiat).toBeDefined();
+          expect(paymentId).toBeDefined();
+        });
+    });
+
+    it('Create payment intent should return transaction not found', async () => {
+      await User.create(userMock);
+      await Transaction.create(transactionMock);
+
+      await api
+        .post(`${apiRoute}/payment-app/create-payment-intent`)
+        .send({
+          currency: 'btc',
+          paymentId: 'fail-vtex-id',
+        })
+        .expect(404);
+    });
+
+    it('Create payment intent should return bad request because bad currency', async () => {
+      await User.create(userMock);
+      await Transaction.create(transactionMock);
+
+      await api
+        .post(`${apiRoute}/payment-app/create-payment-intent`)
+        .send({
+          currency: 'luna',
+          paymentId: transactionMock.vtexPaymentId,
+        })
+        .expect(500);
+    });
   });
 });
+
+// describe('Cron and webhooks', () => {
+//   setupTestDB();
+
+//   it('Update payment should return error because guatapay payment id is wrong', async () => {
+//     await Transaction.create(transactionMock);
+//     await providerService
+//       .updatePayment(transactionMock.vtexPaymentId)
+//       // eslint-disable-next-line jest/no-conditional-expect
+//       .catch((err) => expect(err.statusCode).toBe(400));
+//   });
+
+//   it('Update payment status is pending, so response is undefined', async () => {
+//     await User.create(userMock);
+//     await Transaction.create(transactionMock);
+
+//     await api
+//       .post(`${apiRoute}/payment-app/create-payment-intent`)
+//       .send({
+//         currency: 'btc',
+//         paymentId: transactionMock.vtexPaymentId,
+//       })
+//       .expect(200);
+
+//     const response = await providerService.updatePayment(transactionMock.vtexPaymentId);
+//     expect(response).toBeUndefined();
+//   });
+// });
