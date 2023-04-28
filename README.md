@@ -7,7 +7,7 @@
 Clone the repo:
 
 ```bash
-git clone https://gitlab.com/conexa-projects/guatapay-vtex/backend-vtex
+git clone https://github.com/conexa-projects/Guatapay.VTEX
 ```
 
 Install the dependencies:
@@ -270,28 +270,25 @@ The environment variables can be found and modified in the `.env` file. They com
 ```bash
 - PORT=5420
 - NODE_ENV=development
-- API_URL="https://guatapay-vtex-api.conexa.ai"
+- API_URL="https://localhost:$PORT"
+- FRONTEND_URL="https://localhost:3000"
 - MONGODB_URL=mongodb://guatapay-vtex-bd:27028/guatapay-vtex
 - VTEX_API=""
+- VTEX_KEY=""
 - VTEX_TOKEN=""
-- guatapay_URL="https://uat.guatapay.com/api/v1"
-- guatapay_API_KEY=""
-- guatapay_USER=""
+- GUATAPAY_URL=https://api.guatapay.com/
 ```
 
 | Environment Variable | Description | Default Value  |
 | -------------------- | ----------- | -------------- |
 | `PORT` | The port number of the server | `5420` |
+| `NODE_ENV` | The environment to execute| `development` |
 | `API_URL` | The URL of the API | `http://localhost:$PORT` |
+| `FRONTEND_URL` | The URL of the frontend | `http://localhost:$PORT` |
+| `MONGODB_URL` | The URL of the Mongo DB | `mongodb://`
 | `VTEX_API` | vtex API key| `empty` |
 | `VTEX_TOKEN` | vtex API token| `empty` |
-| `NODE_ENV` | The environment to execute| `development` |
-| `guatapay_URL` | guatapay API URL| `https://uat.guatapay.com/api/v1` |
-| `guatapay_API_KEY` | guatapay API key| `empty` |
-| `guatapay_USER` | guatapay username| `empty` |
-| `MONGODB_URL` | The URL of the Mongo DB | `mongodb://
-
-
+| `GUATAPAY_URL` | guatapay API URL| `https://api.guatapay.com/` |
 
 
 ## Project Structure
@@ -300,6 +297,7 @@ The environment variables can be found and modified in the `.env` file. They com
 .
 ├── src                               # Source files
 │   ├── interfaces                    # Types and interfaces
+│   ├── jobs                          # Crons
 │   ├── config                        # Environment variables and other configurations
 │   ├── controllers                   # Controllers
 │   ├── docs                          # Documentation files (Postman, Swagger)
@@ -335,8 +333,11 @@ List of available routes (base path: `/api/v1`):
 
 **Vitals routes**:\
 `GET /` - GET a welcome message from server
-`GET /vitals/ping` - GET a PING - PONG from server
 `GET /vitals/dbCheck` - GET a status of database
+
+**Payment App routes**:\
+`POST /payment-app/quotation` - Make a quotation
+`POST /payment-app/create-payment-intent` - Make a create payment intent
 
 **Documentation routes**:\
 `GET /docs` - Swagger documentation
@@ -512,8 +513,16 @@ const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
 const userSchema = mongoose.Schema(
-  {
-    /* schema definition here */
+   {
+    username: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    password: protectedString,
+    apiKey: String,
+    dateModified: Date,
+    dateCreated: Date,
   },
   { timestamps: true }
 );

@@ -1,0 +1,1489 @@
+{
+	"info": {
+		"_postman_id": "89227052-933a-49a4-9cc2-2314e4e472da",
+		"name": "Guatapay - Vtex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25745737"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"andres@conexa.ai\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"andres@conexa.ai\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Apr 2023 13:11:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "919"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"397-ey0jY1qh3LZSOp2Cr2M3KDi1DOM\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"_id\": \"63f8eaa2a8136d1f31f853cc\",\n        \"username\": \"andres@conexa.ai\",\n        \"role\": \"merchant\",\n        \"secretHashes\": [\n            \"b1d72d09bd491788c106b10a0d755b4241b707c71d2382f3e4284c8eec6dada7b0664e1f75541f6bbfdd913e1139d0a536126005172e0e32afd45de895575cf4.b5a92c403bfe7c4e\",\n            \"f774492980b41606204a8a4253c42dbafc7a0139e9229b0373456b894fe7dbc9a42205c946b591189d4d058802f3c7a149cd88730a31a8bc09c24ddb638fab63.b4f47f85df8bdf0b\",\n            \"0eeb27e61a558412d14c087b342288ad03f54b981a2ce2891949e3141fe20ea2a6476ab53ab50de4941267b907361d053f211e1a15ae2e35ef5371798c5f722d.160d66848a88d381\",\n            \"3fad7503edf3af3abad14208cc903d29dd63a47f19b76c17895a05dca706d5aadbe7ffbfd546a804a1a7a51d86ffc979cb211135485b2a102fe6d6de12140a37.8f3c47e41126f292\"\n        ],\n        \"__v\": 0\n    },\n    \"authToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoibWVyY2hhbnQiLCJzdWIiOiI2M2Y4ZWFhMmE4MTM2ZDFmMzFmODUzY2MiLCJpYXQiOjE2ODA3MDAzMDMsImV4cCI6MTY4MDcwMDM2M30.vLhYskDkVuKQIQoCUoDEQS2bFwVA7KIluPocF1K3iVA\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create keys",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Berarer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoibWVyY2hhbnQiLCJzdWIiOiI2M2Y4ZWFiMmE4MTM2ZDFmMzFmODUzZDYiLCJpYXQiOjE2ODA3MDAwODAsImV4cCI6MTY4MDcwMDE0MH0.hB4s5j-hafCvDEVIbkYngyS1bkAyA_xS9Rwb6pboO1I",
+								"description": "Auth token obtained in 'auth/login'",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"juan.sancho@conexa.ai\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/system-users/create-keys",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"system-users",
+								"create-keys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Session token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoibWVyY2hhbnQiLCJzdWIiOiI2M2Y4ZWFhMmE4MTM2ZDFmMzFmODUzY2MiLCJpYXQiOjE2ODI1MzU5MDgsImV4cCI6MTY4MjUzNTk2OH0.dFESqBZ-1XeQ-dFc0oWGKt68QwFbDsQ1U3ZG6vyANSg",
+								"description": "Auth token obtained in 'auth/login'",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{apiKey}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "x-api-key",
+								"value": "ExKoHIq/bPSRFnpEb9JU5A0E60UXss6sV2fBw0FlHDY=",
+								"description": "Andres api key",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"andres@conexa.ai\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/system-users/session-token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"system-users",
+								"session-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Session token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoibWVyY2hhbnQiLCJzdWIiOiI2M2Y4ZWFhMmE4MTM2ZDFmMzFmODUzY2MiLCJpYXQiOjE2ODA3MTU2NTIsImV4cCI6MTY4MDcxNTcxMn0.FAwZq6mjOIjCzjnDNwQCVRqlE-MGjZEWQbweEWQoECE",
+										"description": "Auth token obtained in 'auth/login'",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{apiKey}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"andres@conexa.ai\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/system-users/session-token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"system-users",
+										"session-token"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Apr 2023 17:28:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "283"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11b-DCFQtlHgYx2aO/wpaGz6C12nGKA\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"expiresIn\": \"1m\",\n    \"sessionToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDcxNTY5MiwiZXhwIjoxNjgwNzE1NzUyfQ.lC0PBwc0AD5-UB4k4IOTknyUMdl-9MdpYVadTQ1FG90\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Trades",
+			"item": [
+				{
+					"name": "Market Quote",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDYxMTM1MywiZXhwIjoxNjgwNjExNDEzfQ.GD4rOn0j5qVkVWewhcmuDDF8q9_dz1PP6cLHkdjwFRg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currency\": \"btc\",\r\n  \"amount\": 10033\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/trades/market-quote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"trades",
+								"market-quote"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Market Quote",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJJT0UwcmMwSDhwWGR4L2YrMnZXUmhxUjZkZ2RpdFE5R1pPTjlsRThsb293PSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDI5NTIyNCwiZXhwIjoxNjgwMjk1Mjg0fQ.uJXpusXD1ls9LOVizznCJcCdiXdC9Rb-2dTNbVj0Zj8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"currency\": \"btc\",\r\n  \"amount\": 10033\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/trades/market-quote",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"trades",
+										"market-quote"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Mar 2023 20:40:49 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "242"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f2-E6sg/0gH5Aq/OpF5jrwSb3xIkew\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"fiat\": {\n        \"amount\": 10033,\n        \"currency\": \"cop\"\n    },\n    \"crypto\": {\n        \"amount\": 0.00007793,\n        \"currency\": \"btc\",\n        \"network\": \"bitcoin\"\n    },\n    \"buyerFees\": [\n        {\n            \"expressedInCrypto\": 6.2e-7,\n            \"currency\": \"btc\"\n        },\n        {\n            \"expressedInFiat\": 79.8211215193122,\n            \"currency\": \"cop\"\n        }\n    ],\n    \"expires_in\": \"1m\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Payment data by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Session-token",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDY5ODc0NCwiZXhwIjoxNjgwNjk4ODA0fQ.a1t9nz9WRpFg34mCj7DFsqkKnLraUnUdoKfWTarrZAo",
+								"description": "Session bearer token obtained in \"system-users/session-token\" endpoint.",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDY5ODc0NCwiZXhwIjoxNjgwNjk4ODA0fQ.a1t9nz9WRpFg34mCj7DFsqkKnLraUnUdoKfWTarrZAo",
+								"description": "Auth token obtained in 'auth/login'",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/payments/payment-data-by-id/642d6d8c47b735aad4170b2e",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments",
+								"payment-data-by-id",
+								"642d6d8c47b735aad4170b2e"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payment data by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Session-token",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDY5ODc0NCwiZXhwIjoxNjgwNjk4ODA0fQ.a1t9nz9WRpFg34mCj7DFsqkKnLraUnUdoKfWTarrZAo",
+										"description": "Session bearer token obtained in \"system-users/session-token\" endpoint.",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDY5ODc0NCwiZXhwIjoxNjgwNjk4ODA0fQ.a1t9nz9WRpFg34mCj7DFsqkKnLraUnUdoKfWTarrZAo",
+										"description": "Auth token obtained in 'auth/login'",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/payments/payment-data-by-id/642d6d8c47b735aad4170b2e",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"payment-data-by-id",
+										"642d6d8c47b735aad4170b2e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Apr 2023 12:46:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "432"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b0-sPpVz+YygIXIqBBI9RXYmaquxZ0\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"642d6d8c47b735aad4170b2e\",\n    \"merchantId\": \"63f8eaa2a8136d1f31f853cc\",\n    \"addressAccountId\": \"224376\",\n    \"addressAccount\": \"3LRajjNSakbtCLjNbdAyqPmEQYBq7eBJUJ\",\n    \"inputCurrency\": \"btc\",\n    \"outputCurrency\": \"cop\",\n    \"inputAmount\": 0.00009947,\n    \"outputAmount\": 12323,\n    \"feesPayedInCrypto\": 7.9e-7,\n    \"feesPayedInFiat\": 97.87041318990651,\n    \"amountPayed\": 0,\n    \"tradeOrderId\": -1,\n    \"status\": \"pending\",\n    \"lightningInvoice\": \"\",\n    \"createdAt\": \"2023-04-05T12:46:04.155Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Create intent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Session-token",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MTQxODAwOCwiZXhwIjoxNjgxNDE4MDY4fQ.iPXnTh0JLo5LIe7-CAKMij9C0wxu-TcCya2TlvhWv3k",
+								"description": "Session bearer token obtained in \"system-users/session-token\" endpoint",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoibWVyY2hhbnQiLCJzdWIiOiI2M2Y4ZWFhMmE4MTM2ZDFmMzFmODUzY2MiLCJpYXQiOjE2ODE0MTc5OTEsImV4cCI6MTY4MTQxODA1MX0.Y7jm7uy_R69FTR4nU6OtHKhOvNH0AiMzfOi6MS1aqAc",
+								"description": "Auth token obtained in 'auth/login'",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currency\": \"btc\",\r\n  \"amount\": 12323\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/payments/create-intent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments",
+								"create-intent"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create intent",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Session-token",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJFeEtvSElxL2JQU1JGbnBFYjlKVTVBMEU2MFVYc3M2c1YyZkJ3MEZsSERZPSIsInN1YiI6IjYzZjhlYWEyYTgxMzZkMWYzMWY4NTNjYyIsImlhdCI6MTY4MDY5ODc0NCwiZXhwIjoxNjgwNjk4ODA0fQ.a1t9nz9WRpFg34mCj7DFsqkKnLraUnUdoKfWTarrZAo",
+										"description": "Session bearer token obtained in \"system-users/session-token\" endpoint",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoibWVyY2hhbnQiLCJzdWIiOiI2M2Y4ZWFhMmE4MTM2ZDFmMzFmODUzY2MiLCJpYXQiOjE2ODA2OTg3MzUsImV4cCI6MTY4MDY5ODc5NX0.KrgXWa5B1qkzz1v0mJi49FV1eapzilf9z4ZCSsTLsAI",
+										"description": "Auth token obtained in 'auth/login'",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"currency\": \"btc\",\r\n  \"amount\": 12323\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payments/create-intent",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"create-intent"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Apr 2023 12:46:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "690"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b2-QKbw8L6Y/PmZtRCwim8UU6jfRJ8\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"merchantId\": \"63f8eaa2a8136d1f31f853cc\",\n    \"addressAccountId\": \"224376\",\n    \"addressAccount\": \"3LRajjNSakbtCLjNbdAyqPmEQYBq7eBJUJ\",\n    \"inputCurrency\": \"btc\",\n    \"outputCurrency\": \"cop\",\n    \"inputAmount\": 0.00009947,\n    \"outputAmount\": 12323,\n    \"feesPayedInCrypto\": 7.9e-7,\n    \"feesPayedInFiat\": 97.87041318990651,\n    \"amountPayed\": 0,\n    \"tradeOrderId\": -1,\n    \"status\": \"pending\",\n    \"lightningInvoice\": \"\",\n    \"createdAt\": \"2023-04-05T12:46:04.155Z\",\n    \"paymentId\": \"642d6d8c47b735aad4170b2e\",\n    \"expiresIn\": \"1m\",\n    \"qrCodeData\": {\n        \"qrCodeUri\": \"bitcoin:3LRajjNSakbtCLjNbdAyqPmEQYBq7eBJUJ?amount=0.00010026\",\n        \"qrCodeLocation\": \"http://localhost:5000/client/assets/63f8eaa2a8136d1f31f853cc-642d6d8c47b735aad4170b2e-payment-code.svg\"\n    },\n    \"fullInputAmount\": \"0.00010026\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get payment status without auth",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/payments/payment-status-by-id/6447fea9d04712b99b669526",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payments",
+								"payment-status-by-id",
+								"6447fea9d04712b99b669526"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "expired",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payments/payment-status-by-id/642d6d8c47b735aad4170b2e",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"payment-status-by-id",
+										"642d6d8c47b735aad4170b2e"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Apr 2023 20:27:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"75-zZ9wA+87Te+hWRcULA0jgGB07VE\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Payment intent with _id: 642d6d8c47b735aad4170b2e, reason: expired\",\n    \"error\": \"Not Found\"\n}"
+						},
+						{
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payments/payment-status-by-id/4545",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"payment-status-by-id",
+										"4545"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Apr 2023 20:32:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53-Q/6vkwB9yQaaOzuyaY/OQbvFutU\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400,\n    \"message\": \"4545 is not a valid payment id\",\n    \"error\": \"Bad Request\"\n}"
+						},
+						{
+							"name": "Payment pending",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payments/payment-status-by-id/64386735d04712b99b60dd28",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"payment-status-by-id",
+										"64386735d04712b99b60dd28"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Apr 2023 20:34:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "190"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"be-LaszOeNuPFnxpaHTgUfeKLMz7FA\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"inputCurrency\": \"btc\",\n    \"outputCurrency\": \"cop\",\n    \"inputAmount\": 0.00009422,\n    \"outputAmount\": 12323,\n    \"feesPayedInCrypto\": 7.5e-7,\n    \"feesPayedInFiat\": 98.09223094884314,\n    \"amountPayed\": 0,\n    \"status\": \"pending\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Integration",
+			"item": [
+				{
+					"name": "Manifest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vtex/payments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vtex",
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Manifest",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/vtex/payments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vtex",
+										"payments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b2-zZTlxhC8QG6iPz3Nw4epfOPU+eY\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 15:41:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"paymentMethods\": [\n        {\n            \"name\": \"Guatapay\",\n            \"allowsSplit\": \"disabled\"\n        }\n    ],\n    \"customFields\": [\n        {\n            \"name\": \"Client ID - Guatapay\",\n            \"type\": \"text\"\n        },\n        {\n            \"name\": \"Client Secret - Guatapay\",\n            \"type\": \"text\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reference\": \"ddb004bas-4394-4940-9857s-c22b7a5f60f5\",\r\n  \"orderId\": \"1655sd30s4389\",\r\n  \"shopperInteraction\": \"Ecommerce\",\r\n  \"transactionId\": \"759d128f-a9ddbs8-45c6-8a40-45dffe991c5c\",\r\n  \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\",\r\n  \"paymentMethod\": \"Visa\",\r\n  \"paymentMethodCustomCode\": null,\r\n  \"merchantName\": \"Guatapay\",\r\n  \"card\": {\r\n    \"number\": null,\r\n    \"holder\": null,\r\n    \"expiration\": {\r\n      \"month\": null,\r\n      \"year\": null\r\n    },\r\n    \"csc\": null,\r\n    \"document\": null\r\n  },\r\n  \"value\": 100000,\r\n  \"currency\": \"COP\",\r\n  \"installments\": 1,\r\n  \"deviceFingerprint\": \"12ade389087fe\",\r\n  \"ipAddress\": null,\r\n  \"miniCart\": {\r\n    \"buyer\": {\r\n      \"id\": \"c1245228-1c68-11e6-94ac-0afa86a846a5\",\r\n      \"firstName\": \"John\",\r\n      \"lastName\": \"Doe\",\r\n      \"document\": \"01234567890\",\r\n      \"documentType\": \"CPF\",\r\n      \"corporateName\": null,\r\n      \"tradeName\": null,\r\n      \"corporateDocument\": null,\r\n      \"isCorporate\": false,\r\n      \"email\": \"john.doe@example.com\",\r\n      \"phone\": \"+5521987654321\",\r\n      \"createdDate\": null\r\n    },\r\n    \"shippingAddress\": {\r\n      \"country\": \"BRA\",\r\n      \"street\": \"Praia de Botafogo St.\",\r\n      \"number\": \"300\",\r\n      \"complement\": \"3rd Floor\",\r\n      \"neighborhood\": \"Botafogo\",\r\n      \"postalCode\": \"22250040\",\r\n      \"city\": \"Rio de Janeiro\",\r\n      \"state\": \"RJ\"\r\n    },\r\n    \"billingAddress\": {\r\n      \"country\": \"BRA\",\r\n      \"street\": \"Brig. Faria Lima Avenue\",\r\n      \"number\": \"4440\",\r\n      \"complement\": \"10th Floor\",\r\n      \"neighborhood\": \"Itaim Bibi\",\r\n      \"postalCode\": \"04538132\",\r\n      \"city\": \"São Paulo\",\r\n      \"state\": \"SP\"\r\n    },\r\n    \"items\": [\r\n      {\r\n        \"id\": \"132981\",\r\n        \"name\": \"My First Product\",\r\n        \"price\": 50.25,\r\n        \"quantity\": 2,\r\n        \"discount\": 0,\r\n        \"deliveryType\": null\r\n      },\r\n      {\r\n        \"id\": \"132982\",\r\n        \"name\": \"My Second Product\",\r\n        \"price\": 50.25,\r\n        \"quantity\": 1,\r\n        \"discount\": 1,\r\n        \"deliveryType\": null\r\n      }\r\n    ],\r\n    \"shippingValue\": 10.12,\r\n    \"taxValue\": 0.02\r\n  },\r\n  \"merchantSettings\": [\r\n    {\r\n        \"name\": \"Client ID - Guatapay\",\r\n        \"value\":\"juan.sancho@conexa.ai\"\r\n    },\r\n    {\r\n        \"name\": \"Client Secret - Guatapay\",\r\n        \"value\": \"12345678\"\r\n    }],\r\n  \"url\": \"https://admin.mystore.example.com/orders/v32478982\",\r\n  \"callbackUrl\": \"https://heimdall.vtexpayments.com.br/api/payment-provider/callback/896b9217-9310-4407-81d6-d6f15ccb9267/conexapartnermx/efec47f3-f784-4eaf-b6f0-d984d9ab16a1\",\r\n  \"returnUrl\": \"https://mystore.example.com/checkout/order/v32478982\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vtex/payments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vtex",
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"reference\": \"ddb004bas-4394-4940-9857s-c22b7a5f60f5\",\r\n  \"orderId\": \"1655sd30s4389\",\r\n  \"shopperInteraction\": \"Ecommerce\",\r\n  \"transactionId\": \"759d128f-a9ddbs8-45c6-8a40-45dffe991c5c\",\r\n  \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\",\r\n  \"paymentMethod\": \"Visa\",\r\n  \"paymentMethodCustomCode\": null,\r\n  \"merchantName\": \"Windcave\",\r\n  \"card\": {\r\n    \"number\": null,\r\n    \"holder\": null,\r\n    \"expiration\": {\r\n      \"month\": null,\r\n      \"year\": null\r\n    },\r\n    \"csc\": null,\r\n    \"document\": null\r\n  },\r\n  \"value\": 159.89,\r\n  \"currency\": \"USD\",\r\n  \"installments\": 1,\r\n  \"deviceFingerprint\": \"12ade389087fe\",\r\n  \"ipAddress\": null,\r\n  \"miniCart\": {\r\n    \"buyer\": {\r\n      \"id\": \"c1245228-1c68-11e6-94ac-0afa86a846a5\",\r\n      \"firstName\": \"John\",\r\n      \"lastName\": \"Doe\",\r\n      \"document\": \"01234567890\",\r\n      \"documentType\": \"CPF\",\r\n      \"corporateName\": null,\r\n      \"tradeName\": null,\r\n      \"corporateDocument\": null,\r\n      \"isCorporate\": false,\r\n      \"email\": \"john.doe@example.com\",\r\n      \"phone\": \"+5521987654321\",\r\n      \"createdDate\": null\r\n    },\r\n    \"shippingAddress\": {\r\n      \"country\": \"BRA\",\r\n      \"street\": \"Praia de Botafogo St.\",\r\n      \"number\": \"300\",\r\n      \"complement\": \"3rd Floor\",\r\n      \"neighborhood\": \"Botafogo\",\r\n      \"postalCode\": \"22250040\",\r\n      \"city\": \"Rio de Janeiro\",\r\n      \"state\": \"RJ\"\r\n    },\r\n    \"billingAddress\": {\r\n      \"country\": \"BRA\",\r\n      \"street\": \"Brig. Faria Lima Avenue\",\r\n      \"number\": \"4440\",\r\n      \"complement\": \"10th Floor\",\r\n      \"neighborhood\": \"Itaim Bibi\",\r\n      \"postalCode\": \"04538132\",\r\n      \"city\": \"São Paulo\",\r\n      \"state\": \"SP\"\r\n    },\r\n    \"items\": [\r\n      {\r\n        \"id\": \"132981\",\r\n        \"name\": \"My First Product\",\r\n        \"price\": 50.25,\r\n        \"quantity\": 2,\r\n        \"discount\": 0,\r\n        \"deliveryType\": null\r\n      },\r\n      {\r\n        \"id\": \"132982\",\r\n        \"name\": \"My Second Product\",\r\n        \"price\": 50.25,\r\n        \"quantity\": 1,\r\n        \"discount\": 1,\r\n        \"deliveryType\": null\r\n      }\r\n    ],\r\n    \"shippingValue\": 10.12,\r\n    \"taxValue\": 0.02\r\n  },\r\n  \"merchantSettings\": [\r\n    {\r\n        \"name\": \"Client ID - Guatapay\",\r\n        \"value\":\"juan.sancho@conexa.ai\"\r\n    },\r\n    {\r\n        \"name\": \"Client Secret - Guatapay\",\r\n        \"value\": \"12345678\"\r\n    }],\r\n  \"url\": \"https://admin.mystore.example.com/orders/v32478982\",\r\n  \"callbackUrl\": \"https://heimdall.vtexpayments.com.br/api/payment-provider/callback/896b9217-9310-4407-81d6-d6f15ccb9267/conexapartnermx/efec47f3-f784-4eaf-b6f0-d984d9ab16a1\",\r\n  \"returnUrl\": \"https://mystore.example.com/checkout/order/v32478982\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vtex/payments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vtex",
+										"payments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "501"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f5-rltX0IJWbN0PVx5Zf4+glONznYk\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 16:38:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\",\n    \"paymentAppData\": {\n        \"appName\": \"guatapay.vtex\",\n        \"payload\": \"{\\\"paymentId\\\":\\\"eef1df2b-3af4-4dcf-baba-d87s020b46a14\\\",\\\"total\\\":\\\"159.89\\\",\\\"currency\\\":\\\"USD\\\"}\"\n    },\n    \"nsu\": \"NSU-eef1df2b-3af4-4dcf-baba-d87s020b46a14\",\n    \"tid\": \"TID-759d128f-a9ddbs8-45c6-8a40-45dffe991c5c\",\n    \"authorizationId\": \"AUT-ddb004bas-4394-4940-9857s-c22b7a5f60f5\",\n    \"status\": \"undefined\",\n    \"message\": null,\n    \"code\": null,\n    \"delayToAutoSettleAfterAntifraud\": 0,\n    \"delayToCancel\": 600,\n    \"delayToAutoSettle\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Get quotation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\": \"btc\",\r\n    \"amount\": 10000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/payment-app/quotation",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payment-app",
+								"quotation"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get quotation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currency\": \"btc\",\r\n    \"amount\": 10000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payment-app/quotation",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payment-app",
+										"quotation"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5d-Js/ZJOshrMQqwFcnpukKuTs5npw\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 16:34:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"crypto\": {\n        \"amount\": 0.00007639,\n        \"fee\": 6.1e-7\n    },\n    \"fiat\": {\n        \"amount\": 10000,\n        \"fee\": 79.85338395077889\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create payment intent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\": \"bc\",\r\n    \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/payment-app/create-payment-intent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payment-app",
+								"create-payment-intent"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create payment intent",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currency\": \"btc\",\r\n    \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payment-app/create-payment-intent",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payment-app",
+										"create-payment-intent"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "202"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ca-dIyxXquZ6XNheS4sjkhyz0VcqqU\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 17 Apr 2023 17:38:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": \"3PoG91SNjKSbKSmfC14KyBzzyVfMHuXWN4\",\n    \"crypto\": {\n        \"amount\": 0.00076984,\n        \"fee\": 0.00000615\n    },\n    \"fiat\": {\n        \"amount\": \"100000.00\",\n        \"fee\": 798.8672971006963\n    },\n    \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\"\n}"
+						},
+						{
+							"name": "Create payment intent",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currency\": \"bc\",\r\n    \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payment-app/create-payment-intent",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payment-app",
+										"create-payment-intent"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"65a-LJ7GUIHuWr6YIOnqatBClQTotHw\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Apr 2023 16:03:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"statusCode\": 500,\n    \"message\": \"currency must be one of [btc, lightning-btc, usdc]\",\n    \"code\": \"currency-must-be-one-of-[btc,-lightning-btc,-usdc]\",\n    \"stack\": \"Error: \\\"currency\\\" must be one of [btc, lightning-btc, usdc]\\n    at C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\conexa-core-server\\\\dist\\\\modules\\\\validation\\\\middlewares\\\\validate.js:15:25\\n    at Layer.handle [as handle_request] (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at Route.dispatch (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:114:3)\\n    at Layer.handle [as handle_request] (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:15\\n    at Function.process_params (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:346:12)\\n    at next (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:280:10)\\n    at Function.handle (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:175:3)\\n    at router (C:\\\\Users\\\\agust\\\\OneDrive\\\\Desktop\\\\trabajo\\\\Guatapay.VTEX\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:47:12)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancellation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"paymentId\": \"eef1df2b-3af4-4dcf-baba-d87s020b46a14\",\r\n  \"message\": \"Cancellation should be done manually\",\r\n  \"code\": \"cancel-manually\",\r\n  \"cancellationId\": null,\r\n  \"requestId\": \"007B7D9B3BB4440982D8B6BA04126B01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vtex/cancellations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vtex",
+								"cancellations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
