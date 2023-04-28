@@ -1,10 +1,17 @@
+import { Currency } from 'guatapay-sdk/dist/interfaces/client.interfaces';
 import Joi from 'joi';
 
-const sessionParams = {
-  query: Joi.object().keys({
-    sessionId: Joi.string().required(),
-    username: Joi.string().required(),
+const { btc, lightningBtc, usdc }: { [key: string]: Currency } = {
+  btc: 'btc',
+  lightningBtc: 'lightning-btc',
+  usdc: 'usdc',
+};
+
+const intentPayment = {
+  body: Joi.object().keys({
+    currency: Joi.string().valid(btc, lightningBtc, usdc).required(),
+    paymentId: Joi.string().required(),
   }),
 };
 
-export default { sessionParams };
+export default { intentPayment };

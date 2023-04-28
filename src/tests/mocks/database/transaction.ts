@@ -22,7 +22,7 @@ export const transactionMock: ITransaction = {
     cryptoCurrency: 'btc',
     fiatCurrency: 'COP',
     cryptoAmount: 0.1,
-    fiatAmount: '1200',
+    fiatAmount: '120000',
     feesPayedInCrypto: 1,
     feesPayedInFiat: 1,
     amountPayed: 1,
