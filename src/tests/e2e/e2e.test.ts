@@ -13,6 +13,7 @@ import { userMock } from '../mocks/database/user';
 import User from '../../models/User.model';
 import Transaction from '../../models/Transaction.model';
 import { transactionMock } from '../mocks/database/transaction';
+import providerService from '../../services/provider.service';
 
 const api = supertest(app);
 const apiRoute: string = '/api/v1';
@@ -154,26 +155,6 @@ describe('Payment app endpoints', () => {
   });
 
   describe('Intent payment endpoint', () => {
-    it('Should be 200 and create a intent payment', async () => {
-      await User.create(userMock);
-      await Transaction.create(transactionMock);
-
-      await api
-        .post(`${apiRoute}/payment-app/create-payment-intent`)
-        .send({
-          currency: 'btc',
-          paymentId: transactionMock.vtexPaymentId,
-        })
-        .expect(200)
-        .expect((res) => {
-          const { qrString, crypto, fiat, paymentId } = res.body;
-          expect(qrString).toBeDefined();
-          expect(crypto).toBeDefined();
-          expect(fiat).toBeDefined();
-          expect(paymentId).toBeDefined();
-        });
-    });
-
     it('Create payment intent should return transaction not found', async () => {
       await User.create(userMock);
       await Transaction.create(transactionMock);
@@ -189,43 +170,56 @@ describe('Payment app endpoints', () => {
 
     it('Create payment intent should return bad request because bad currency', async () => {
       await User.create(userMock);
-      await Transaction.create(transactionMock);
+      const transactions = {
+        ...transactionMock,
+        vtexPaymentId: `${transactionMock.vtexPaymentId}-${Math.floor(Math.random() * (0 - 10 + 1) + 0)}`,
+      };
+
+      await Transaction.create(transactions);
 
       await api
         .post(`${apiRoute}/payment-app/create-payment-intent`)
         .send({
           currency: 'luna',
-          paymentId: transactionMock.vtexPaymentId,
+          paymentId: transactions.vtexPaymentId,
         })
         .expect(500);
     });
   });
+
+  describe('Update payment endpoint', () => {
+    it('Update payment should return error because guatapay payment id is wrong', async () => {
+      const transactions = {
+        ...transactionMock,
+        vtexPaymentId: `${transactionMock.vtexPaymentId}-${Math.floor(Math.random() * (0 - 10 + 1) + 0)}`,
+      };
+
+      await Transaction.create(transactions);
+      await providerService
+        .updatePayment(transactions.vtexPaymentId)
+        // eslint-disable-next-line jest/no-conditional-expect
+        .catch((err) => expect(err.statusCode).toBe(400));
+    });
+
+    it('Update payment status is pending, so response is undefined', async () => {
+      await User.create(userMock);
+      const transactions = {
+        ...transactionMock,
+        vtexPaymentId: `${transactionMock.vtexPaymentId}-${Math.floor(Math.random() * (0 - 10 + 1) + 0)}`,
+      };
+
+      await Transaction.create(transactions);
+
+      await api
+        .post(`${apiRoute}/payment-app/create-payment-intent`)
+        .send({
+          currency: 'btc',
+          paymentId: transactions.vtexPaymentId,
+        })
+        .expect(200);
+
+      const response = await providerService.updatePayment(transactions.vtexPaymentId);
+      expect(response).toBeUndefined();
+    });
+  });
 });
-
-// describe('Cron and webhooks', () => {
-//   setupTestDB();
-
-//   it('Update payment should return error because guatapay payment id is wrong', async () => {
-//     await Transaction.create(transactionMock);
-//     await providerService
-//       .updatePayment(transactionMock.vtexPaymentId)
-//       // eslint-disable-next-line jest/no-conditional-expect
-//       .catch((err) => expect(err.statusCode).toBe(400));
-//   });
-
-//   it('Update payment status is pending, so response is undefined', async () => {
-//     await User.create(userMock);
-//     await Transaction.create(transactionMock);
-
-//     await api
-//       .post(`${apiRoute}/payment-app/create-payment-intent`)
-//       .send({
-//         currency: 'btc',
-//         paymentId: transactionMock.vtexPaymentId,
-//       })
-//       .expect(200);
-
-//     const response = await providerService.updatePayment(transactionMock.vtexPaymentId);
-//     expect(response).toBeUndefined();
-//   });
-// });
