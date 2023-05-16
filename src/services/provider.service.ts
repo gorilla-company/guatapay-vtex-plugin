@@ -84,8 +84,10 @@ const createIntentPayment = async (currency: Currency, vtexPaymentId: string) =>
   try {
     const dbTransaction = await findTransaction({ vtexPaymentId });
 
-    if (!dbTransaction)
+    if (!dbTransaction) {
+      Logger.error('Transaction not found');
       throw new ApiError(httpStatus.NOT_FOUND, 'Transaction not found', 'transaction.not-found');
+    }
 
     const dbUser = await findUser(dbTransaction.username);
 
@@ -116,6 +118,7 @@ const createIntentPayment = async (currency: Currency, vtexPaymentId: string) =>
 
     return { qrString, crypto, fiat, paymentId: vtexPaymentId };
   } catch (err) {
+    if (err instanceof Error) throw err;
     Logger.error('Could not create a intent payment');
     throw new ApiError(httpStatus.BAD_REQUEST, 'Could not create a intent payment', JSON.stringify(err));
   }
@@ -132,8 +135,10 @@ const updatePayment = async (vtexPaymentId: string) => {
   try {
     const payment = await tradesServices.getPaymentStatus(dbTransaction.guatapayPaymentId);
 
-    if (payment.status === 'pending')
-      return Logger.info(`Intent payment with vtexId ${vtexPaymentId} is still pending`);
+    if (payment.status === 'pending') {
+      Logger.info(`Intent payment with vtexId ${vtexPaymentId} is still pending`);
+      return;
+    }
 
     dbTransaction.guatapayStatus = payment.status;
     dbTransaction.money.amountPayed = payment.amountPayed;
@@ -148,14 +153,16 @@ const updatePayment = async (vtexPaymentId: string) => {
     };
 
     Logger.info(`Intent payment with vtexId ${vtexPaymentId} was ${payment.status}`);
-    return await vtex.notifyPaymentStatus(vtexAuth, dbTransaction.vtexCallbackUrl, vtexBody);
+    await vtex.notifyPaymentStatus(vtexAuth, dbTransaction.vtexCallbackUrl, vtexBody);
+    return;
   } catch (err: any) {
     const expired: Status = 'expired';
 
     if (err.message.includes(expired)) {
       Logger.error(`Intent payment with vtexId ${vtexPaymentId} is expired`);
       dbTransaction.guatapayStatus = expired;
-      return await dbTransaction.save();
+      await dbTransaction.save();
+      return;
     }
 
     Logger.error('Could not update a intent payment');

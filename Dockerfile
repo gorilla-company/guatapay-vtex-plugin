@@ -1,26 +1,15 @@
-# development stage
-FROM node:14-alpine as base
+FROM node:16-alpine
 
-WORKDIR /usr/src/app
+RUN apk update && \
+    apk add curl && \
+    apk add vim && \
+    apk add git 
 
-COPY package.json yarn.lock tsconfig.json ecosystem.config.json ./
+RUN mkdir -p /opt/app/backend-vtex
+COPY ./backend-vtex /opt/app/backend-vtex
+RUN cd /opt/app/backend-vtex && yarn install --pure-lockfile
+RUN cd /opt/app/backend-vtex && yarn build
+WORKDIR /opt/app/backend-vtex
+CMD ["npm", "start"]
 
-COPY ./src ./src
-
-RUN ls -a
-
-RUN yarn install --pure-lockfile && yarn build
-
-# production stage
-
-FROM base as production
-
-WORKDIR /usr/prod/app
-
-ENV NODE_ENV=production
-
-COPY package.json yarn.lock ecosystem.config.json ./
-
-RUN yarn install --production --pure-lockfile
-
-COPY --from=base /usr/src/app/dist ./dist
+EXPOSE 5420

@@ -40,3 +40,6 @@ dist
 
 # docker data
 data
+
+#Jenkins
+Jenkinsfile

@@ -1,48 +1,96 @@
-pipeline{
+pipeline {
+  agent { 
+	  node {
+          	 label 'srv2-docker-staging'
+                 customWorkspace '/home/conexa/guatapay/guatapay-back-vtex'
+               }
+    }
 
-	agent{
-	        node {
-          	        label 'clip-production'
-            }
-         }
-	environment {
-        SCANNER_HOME = tool 'sonarqube'
-	}
-	stages {
-    stage('SonarQube analysis') {
-    
-    steps {
-            script{
-			        dir('/home/conexa/workspace/Clients/Guatapay/staging/analyzing-deploy-source-code/src'){
+  environment {
+	DOCKERHUB_CREDENTIALS=credentials('github-cr-token')
+        name_final = "guatapay-vtex-bd"
 
-                            withSonarQubeEnv(credentialsId: 'jenkins-sonarqube', installationName: 'sonarqube') {
-                                                sh '''$SCANNER_HOME/bin/sonar-scanner \
-                                                -Dsonar.projectKey=guatapay-backend-vtex-stage \
-                                                -Dsonar.projectName=guatapay-backend-vtex-stage \
-                                                -Dsonar.sources=. \
-                                                -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
-                            }
+    }
+    stages {
+	  stage('Login in github') {
+
+            steps {
+                    echo 'Login in github.......'
+                    script {
+                            sh 'git clone -b develop https://ajrincones-conexa:$DOCKERHUB_CREDENTIALS_PSW@github.com/conexa-projects/Guatapay.VTEX.git backend-vtex'
                     }
                   }
-           }
-}
-// stage("Quality gate") {
-//       steps {
-//         script {
-//           def qualitygate = waitForQualityGate()
-//           sleep(10)
-//           if (qualitygate.status != "OK") {
-//             waitForQualityGate abortPipeline: true
-//           }
-//         }
-//       }
-//     }
+          } 
+          stage('Erase container') {
 
-stage ("build") {		//an arbitrary stage name
-            steps {
-                build 'deploy-backend-vtex'	//this is where we specify which job to invoke.
+            when {
+                expression { 
+                    DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(sudo docker ps -q --filter name=${name_final})"').trim()
+                    return  DOCKER_EXIST != '' 
+                }
             }
-        }
-}
+            steps {
+            echo 'erase container.......'    
+                script{
+			dir('/home/conexa/guatapay/guatapay-back-vtex'){
+				
+                    		sh ''' 
+                         		sudo mv backend-vtex/Dockerfile .
+                    		 '''
+                    		sh ''' 
+                         		sudo mv backend-vtex/docker-compose.yml .
+                    		 '''
+                    		sh ''' 
+                         		sudo docker compose down
+                    		 '''
+                    	}
+              	      }
+                 }                                       
+            }
+    
+        stage('Build container') {
+	
+            steps {
+			echo 'build container.......'
+                	script{
+				dir('/home/conexa/guatapay/guatapay-back-vtex'){
+                    			sh ''' 
+                    				sudo docker compose build --no-cache
+                    			'''
+                    		}
+               	     	      }	                    
+                                  
+            	 }
+           }
+        stage('Up container') {
+        
+            steps {
+                echo 'up container.......'
+                script{
+			dir('/home/conexa/guatapay/guatapay-back-vtex'){
+                    		sh ''' 
+                    			sudo docker compose up -d --remove-orphans
+ 
+                    		'''
+				sh ''' 
+                    			sudo rm -rf backend-vtex
+ 
+                    		'''
+                    	}
+                      }                    
+            	  }                
+          
+            	  }    
+        }   
+    post {
+		success {
+	               	slackSend channel: '#notifications-jenkins', color: '#6495ed', message: "Success: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        	}
+
+      		failure {
+	               	slackSend channel: '#notifications-jenkins', color: '#ff0000', message: "Failure: ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+      		}
+
+  	}
 
 }
