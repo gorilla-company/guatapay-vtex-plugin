@@ -1,0 +1,22 @@
+service: guatapay-api-serverless
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+  timeout: 120
+
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          path: '{proxy+}'
+          method: any
+          cors: true
